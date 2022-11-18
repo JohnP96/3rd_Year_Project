@@ -1,0 +1,11 @@
+setting filename to 96_an_almand.tab
+tab 4.3.102 copyright 1995-2020 by Wayne Cripps
+tab: tab_p: sys_count: 1
+tab: tab_p: sys_count: 2
+tab: tab_p: sys_count: 3
+tab: tab_p: sys_count: 4
+tab: tab_p: sys_count: 5
+tab: tab_p: sys_count: 6
+tab: tab_p: sys_count: 1
+tab: pass1: unknown flag 80 P           at index 96
+pass1: unknown flag value in inter file 7 97

@@ -1,0 +1,14 @@
+setting filename to 58_the_shoemakers_wife.tab
+tab 4.3.102 copyright 1995-2020 by Wayne Cripps
+tab: tab_p: sys_count: 1
+tab: tab_p: sys_count: 2
+tab: tab_p: sys_count: 3
+tab: tab_p: sys_count: 4
+tab: tab_p: sys_count: 5
+tab: tab_p: sys_count: 6
+tab: pass1: unknown flag 116 t#D         at index 33
+pass1: unknown flag value in inter file 6 34
+tab: pass1: unknown flag 116 t#c         at index 38
+pass1: unknown flag value in inter file 6 39
+tab: pass1: unknown flag 116 t# d        at index 43
+pass1: unknown flag value in inter file 6 44

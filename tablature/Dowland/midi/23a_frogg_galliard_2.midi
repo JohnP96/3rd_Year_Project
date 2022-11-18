@@ -1,0 +1,54 @@
+setting filename to 23a_frogg_galliard_2.tab
+tab 4.3.102 copyright 1995-2020 by Wayne Cripps
+tab: tab_p: sys_count: 1
+tab: tab_p: sys_count: 2
+tab: tab_p: sys_count: 3
+tab: tab_p: sys_count: 4
+tab: pass1: unknown flag 116 t#f         at index 43
+pass1: unknown flag value in inter file 4 44
+tab: pass1: unknown flag 116 t#c         at index 48
+pass1: unknown flag value in inter file 4 49
+tab: pass1: unknown flag 116 t#a         at index 53
+pass1: unknown flag value in inter file 4 54
+tab: pass1: unknown flag 116 t#c         at index 59
+pass1: unknown flag value in inter file 4 60
+tab: pass1: unknown flag 116 t# e        at index 64
+pass1: unknown flag value in inter file 4 65
+tab: pass1: unknown flag 116 t# c        at index 69
+pass1: unknown flag value in inter file 4 70
+tab: pass1: unknown flag 116 t# e        at index 75
+pass1: unknown flag value in inter file 4 76
+tab: pass1: unknown flag 116 t# a        at index 80
+pass1: unknown flag value in inter file 4 81
+tab: pass1: unknown flag 116 t# e        at index 85
+pass1: unknown flag value in inter file 4 86
+tab: tab_p: sys_count: 5
+tab: pass1: unknown flag 116 t#a         at index 2
+pass1: unknown flag value in inter file 5 3
+tab: pass1: unknown flag 116 t# c        at index 7
+pass1: unknown flag value in inter file 5 8
+tab: pass1: unknown flag 116 t#a         at index 12
+pass1: unknown flag value in inter file 5 13
+tab: pass1: unknown flag 116 t#f         at index 18
+pass1: unknown flag value in inter file 5 19
+tab: pass1: unknown flag 116 t#c         at index 23
+pass1: unknown flag value in inter file 5 24
+tab: pass1: unknown flag 116 t#e         at index 28
+pass1: unknown flag value in inter file 5 29
+tab: pass1: unknown flag 116 t# a        at index 34
+pass1: unknown flag value in inter file 5 35
+tab: pass1: unknown flag 116 t#a         at index 39
+pass1: unknown flag value in inter file 5 40
+tab: pass1: unknown flag 116 t# c        at index 44
+pass1: unknown flag value in inter file 5 45
+tab: pass1: unknown flag 116 t# a        at index 50
+pass1: unknown flag value in inter file 5 51
+tab: pass1: unknown flag 116 t# c        at index 55
+pass1: unknown flag value in inter file 5 56
+tab: pass1: unknown flag 116 t#  d       at index 60
+pass1: unknown flag value in inter file 5 61
+tab: tab_p: sys_count: 6
+tab: tab_p: sys_count: 1
+tab: tab_p: sys_count: 2
+tab: tab_p: sys_count: 3
+tab: tab_p: sys_count: 4
