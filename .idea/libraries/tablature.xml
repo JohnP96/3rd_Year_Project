@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="tablature">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/tablature.zip!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

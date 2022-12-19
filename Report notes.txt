@@ -1,0 +1,11 @@
+Using tab - had to read about tab and run in command line
+
+Ghostview to view files - https://www.ghostscript.com/releases/gsdnld.html
+
+Learning how to use genetic algorithms - 8 queens puzzle
+
+Creating 8 queens puzzle - re-learning java
+
+Ignored optimisation - focused on creating working algorithm
+
+Looked at reading midi files in java
