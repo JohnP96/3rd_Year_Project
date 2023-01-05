@@ -9,3 +9,6 @@ Ignored optimisation - focused on creating working algorithm
 Looked at reading midi files in java - javax.sound.midi, sequence
 Started by using one track midi files - could add multi-track functionality later
  
+Problems: 
+	Spacing in TAB
+
