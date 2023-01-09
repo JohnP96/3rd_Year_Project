@@ -13,10 +13,13 @@
  ************************************************************************************/
 public class GuitarNote {
 
+    private Notes note;
     private int[] positions;
+    private long startTick; // Duration is measured in MIDI ticks
 
     /**
-     * Static arrays containing all possible positions for each note
+     * Static arrays containing all possible positions on a 24 fret fretboard
+     * for each note
      */
 
     public static final int[] cPositions = {10, 19, 33, 48, 53, 62, 82, 91, 105, 120, 125, 134};
@@ -36,7 +39,9 @@ public class GuitarNote {
      * Constructors
      */
 
-    public GuitarNote(Notes note){
+    public GuitarNote(Notes note, long startTick){
+        this.note = note;
+        this.startTick = startTick;
         if(note == Notes.C){
             positions = cPositions;
         }
@@ -79,5 +84,11 @@ public class GuitarNote {
      * Standard get and set methods
      */
 
+    public int[] getPositions(){
+        return positions;
+    }
 
+    public String toString(){
+        return "Note: " + note + ", Start: " + startTick;
+    }
 }
