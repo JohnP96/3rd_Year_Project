@@ -1,3 +1,5 @@
+import java.util.Random;
+
 /************************************************************************************
  * Note
 
@@ -7,7 +9,7 @@
 
  * Description: Contains the possible fretboard positions of the given note. These
  * are encoded as integers with 0 to 6 as the open strings from low to high and
- * continuing in this way up the fretboard to fret 24.
+ * continuing in this way up the fretboard to fret 24 (149).
 
  * Bug fixes/improvements:
  ************************************************************************************/
@@ -35,9 +37,6 @@ public class GuitarNote {
     public static final int[] aSharpPositions = {7, 21, 36, 41, 50, 70, 93, 108, 113, 122, 142};
     public static final int[] bPositions = {4, 13, 27, 42, 47, 56, 76, 99, 114, 119, 128, 148};
 
-    /**
-     * Constructors
-     */
 
     public GuitarNote(Notes note, long startTick){
         this.note = note;
@@ -80,15 +79,20 @@ public class GuitarNote {
         }
     }
 
-    /**
-     * Standard get and set methods
-     */
-
     public int[] getPositions(){
         return positions;
     }
 
     public String toString(){
         return "Note: " + note + ", Start: " + startTick;
+    }
+
+    /**
+     * Returns a random position from the possible positions for that note
+     * @return An integer denoting the fret position
+     */
+    public int randomPosition(){
+        Random rand = new Random();
+        return positions[rand.nextInt(positions.length)];
     }
 }

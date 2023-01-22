@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 
 /************************************************************************************
@@ -7,20 +8,36 @@ import java.io.InputStreamReader;
 
  * Author: John Pederson
 
- * Last edited: 04/01/2023
+ * Last edited: 19/01/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
- * Bug fixes/improvements:
+ * Bug fixes/improvements: Error handling
  ************************************************************************************/
-public class TABInterface {
+public class TabInterface {
+
+    /**
+     * Creates a .tab file from the tab provided
+     * @return A boolean for whether the function was successful or not
+     */
+    public static boolean createTabFile(String name){
+        try(FileWriter writer = new FileWriter("tab_files/" + name + ".tab");) {
+            writer.append("{").append(name).append("}\n").append("b\n");
+            writer.append("\ne\n");
+        }
+        catch(Exception e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     /**
      * Sends the generated .tab file to the TAB software to be converted into
      * readable tablature
      * @return A boolean for whether the function was successful or not
      */
-    public boolean sendToTAB(String name){
+    public static boolean sendToTAB(String name){
         try {
             String output = "../output_tab/" + name;
             String input = "../tab_files/" + name + ".tab";

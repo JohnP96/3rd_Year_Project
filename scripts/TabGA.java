@@ -10,9 +10,6 @@
 
  * Bug fixes/improvements: Error handling needs to be improved.
  ************************************************************************************/
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.InputStreamReader;
 
 public class TabGA {
 
@@ -20,20 +17,12 @@ public class TabGA {
     private int populationSize;
     private int mutationRate;
 
-    /**
-     * Constructors
-     */
 
     public TabGA(){}
     public TabGA(String name){
         this.name = name;
     }
 
-
-    /**
-     * Standard get and set methods (primarily for testing and optimising
-     * the algorithm)
-     */
 
     public String getName(){
         return name;
@@ -57,14 +46,6 @@ public class TabGA {
 
     public void setMutationRate(int mutationRate) {
         this.mutationRate = mutationRate;
-    }
-
-
-    /**
-     * Read in MIDI file and convert into sequence of Note objects -
-     * currently only allows for one MIDI track
-     */
-    public void readMIDI(){
     }
 
 

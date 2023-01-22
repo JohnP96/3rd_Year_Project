@@ -6,7 +6,7 @@
  * Last edited: 05/01/2023
 
  * Description: Adds functionality for reading notes from a midi sequence to be used
- * by the TabGA class. Currently does not include note timings.
+ * by the TabGA class. Does not currently include note timings.
 
  * Bug fixes/improvements: Update to deal with multiple tracks and different file
  * extensions. Update to better deal with timings.
