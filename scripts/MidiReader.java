@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 05/01/2023
+ * Last edited: 23/01/2023
 
  * Description: Adds functionality for reading notes from a midi sequence to be used
  * by the TabGA class. Does not currently include note timings.
@@ -21,7 +21,10 @@ public class MidiReader {
     private Track track;
 
     /**
-     * Constructors
+     * Creates an object for reading MIDI files into GuitarNote objects.
+     * @param file The path to the MIDI file to be read.
+     * @throws InvalidMidiDataException If there is an error with the MIDI data.
+     * @throws IOException If file cannot be found.
      */
 
     public MidiReader(String file) throws InvalidMidiDataException, IOException {

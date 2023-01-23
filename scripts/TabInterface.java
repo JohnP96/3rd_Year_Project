@@ -1,28 +1,39 @@
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
-
 /************************************************************************************
  * TAB Interface
 
  * Author: John Pederson
 
- * Last edited: 19/01/2023
+ * Last edited: 23/01/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
  * Bug fixes/improvements: Error handling
  ************************************************************************************/
-public class TabInterface {
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+
+public class  TabInterface {
 
     /**
-     * Creates a .tab file from the tab provided
+     * Creates a .tab file from the Tab object provided
      * @return A boolean for whether the function was successful or not
      */
-    public static boolean createTabFile(String name){
+    public static boolean createTabFile(String name, Tab tab){
         try(FileWriter writer = new FileWriter("tab_files/" + name + ".tab");) {
-            writer.append("{").append(name).append("}\n").append("b\n");
+            writer.append("$line=o\n").append("{").append(name).append("}\n").append("b\n");
+
+            for(ArrayList<Integer> chord : tab.getChords()){
+                writer.append('0');
+                for(Integer position : chord){
+                    int stringNum = position / 6;
+                    int fretNum = position % 6;
+
+                }
+            }
+
             writer.append("\ne\n");
         }
         catch(Exception e){
