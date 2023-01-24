@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class Tab {
 
-    private ArrayList<ArrayList<Integer>> chords;
+    private ArrayList<ArrayList<GuitarNote>> chords;
 
 
     /**
@@ -25,17 +25,16 @@ public class Tab {
         /* Create chords from notes played on the same tick, then add these
         * to the array of positions */
         chords = new ArrayList<>();
-        ArrayList<Integer> chord = new ArrayList<>();
+        ArrayList<GuitarNote> chord = new ArrayList<>();
         long lastTick = 0;
         for (GuitarNote note : notes) {
-            int pos = note.randomPosition();
+            note.randomPosition();
             if (note.getStartTick() == lastTick) {
                 // Check the chord does not already contain this fret position
-                while (chord.contains(pos)) {
+                while () {
                     note.removePosition(pos);
-                    pos = note.randomPosition();
                 }
-                chord.add(pos);
+                chord.add(note);
             } else {
                 chords.add(chord);
                 chord = new ArrayList<>();

@@ -13,11 +13,14 @@
  ************************************************************************************/
 import java.util.Random;
 
-public class GuitarNote {
+public class GuitarNote implements Comparable<GuitarNote>{
 
-    private Notes note;
-    private int[] positions;
-    private long startTick; // Duration is measured in MIDI ticks
+    private final Notes note;
+    private int[] possiblePositions;
+    private final long startTick; // Duration is measured in MIDI ticks
+    private int currentPosition;
+    private int stringNumber;
+    private int fretNumber;
 
     /**
      * Static arrays containing all possible positions on a 24 fret fretboard
@@ -48,49 +51,55 @@ public class GuitarNote {
         this.note = note;
         this.startTick = startTick;
         if(note == Notes.C){
-            positions = cPositions;
+            possiblePositions = cPositions;
         }
         else if(note == Notes.C_SHARP){
-            positions = cSharpPositions;
+            possiblePositions = cSharpPositions;
         }
         else if(note == Notes.D){
-            positions = dPositions;
+            possiblePositions = dPositions;
         }
         else if(note == Notes.D_SHARP){
-            positions = dSharpPositions;
+            possiblePositions = dSharpPositions;
         }
         else if(note == Notes.E){
-            positions = ePositions;
+            possiblePositions = ePositions;
         }
         else if(note == Notes.F){
-            positions = fPositions;
+            possiblePositions = fPositions;
         }
         else if(note == Notes.F_SHARP){
-            positions = fSharpPositions;
+            possiblePositions = fSharpPositions;
         }
         else if(note == Notes.G){
-            positions = gPositions;
+            possiblePositions = gPositions;
         }
         else if(note == Notes.G_SHARP){
-            positions = gSharpPositions;
+            possiblePositions = gSharpPositions;
         }
         else if(note == Notes.A){
-            positions = aPositions;
+            possiblePositions = aPositions;
         }
         else if(note == Notes.A_SHARP){
-            positions = aSharpPositions;
+            possiblePositions = aSharpPositions;
         }
         else if(note == Notes.B){
-            positions = bPositions;
+            possiblePositions = bPositions;
         }
     }
 
-    public int[] getPositions(){
-        return positions;
+    public int[] getPossiblePositions(){
+        return possiblePositions;
     }
 
     public long getStartTick() {
         return startTick;
+    }
+
+    public void setCurrentPosition(int currentPosition) {
+        this.currentPosition = currentPosition;
+        stringNumber = currentPosition / 6;
+        fretNumber = currentPosition % 6;
     }
 
     /**
@@ -98,15 +107,15 @@ public class GuitarNote {
      * @param position An int denoting the fret position to be removed
      */
     public void removePosition(int position){
-        int[] newPositions = new int[positions.length - 1];
+        int[] newPositions = new int[possiblePositions.length - 1];
         int i = 0;
-        for(int p : positions){
+        for(int p : possiblePositions){
             if(p != position){
                 newPositions[i] = p;
                 i++;
             }
         }
-        positions = newPositions;
+        possiblePositions = newPositions;
     }
 
     public String toString(){
@@ -117,8 +126,12 @@ public class GuitarNote {
      * Returns a random position from the possible positions for that note
      * @return An integer denoting the fret position
      */
-    public int randomPosition(){
+    public void randomPosition(){
         Random rand = new Random();
-        return positions[rand.nextInt(positions.length)];
+        setCurrentPosition(possiblePositions[rand.nextInt(possiblePositions.length)]);
+    }
+
+    public int compareTo(GuitarNote note) {
+        return Integer.compare(this.stringNumber, note.stringNumber);
     }
 }

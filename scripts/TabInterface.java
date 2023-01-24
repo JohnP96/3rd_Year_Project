@@ -30,7 +30,7 @@ public class  TabInterface {
                 for(Integer position : chord){
                     int stringNum = position / 6;
                     int fretNum = position % 6;
-
+                    
                 }
             }
 
