@@ -25,16 +25,21 @@ public class  TabInterface {
         try(FileWriter writer = new FileWriter("tab_files/" + name + ".tab");) {
             writer.append("$line=o\n").append("{").append(name).append("}\n").append("b\n");
 
-            for(ArrayList<Integer> chord : tab.getChords()){
-                writer.append('0');
-                for(Integer position : chord){
-                    int stringNum = position / 6;
-                    int fretNum = position % 6;
-                    
+            for(ArrayList<GuitarNote> chord : tab.getChords()){
+                int lastString = -1;
+                writer.append('0'); // Sets flag
+                for(GuitarNote note : chord){
+                    /* Add spaces for un-played strings*/
+                    for (int i = lastString; i<(note.getStringNumber()-1); i++){
+                        writer.append(' ');
+                    }
+                    writer.append(note.getFretNumber().toString());
+                    lastString = note.getStringNumber();
                 }
+                writer.append('\n');
             }
 
-            writer.append("\ne\n");
+            writer.append("e\n");
         }
         catch(Exception e){
             e.printStackTrace();

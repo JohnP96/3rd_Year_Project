@@ -9,18 +9,9 @@ public class Main {
 
         try {
             MidiReader r = new MidiReader("rogero.midi");
-            for(int i = 0; i<1000000; i++) {
-                GuitarNote[] notes = r.getNoteSequence();
-                Tab tab = new Tab(notes);
-                for (ArrayList<Integer> x : tab.getChords()) {
-                    if (x.size() > 1) {
-                        Set<Integer> set = new HashSet<>(x);
-                        if(set.size() < x.size()){
-                            System.out.println("I want to die");
-                        }
-                    }
-                }
-            }
+            Tab tab = new Tab(r.getNoteSequence());
+            //TabInterface.createTabFile("test", tab);
+            TabInterface.sendToTAB("test");
         }
         catch (Exception e){
             e.printStackTrace();

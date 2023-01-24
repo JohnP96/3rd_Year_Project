@@ -10,6 +10,7 @@
  * Bug fixes/improvements:
  ************************************************************************************/
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Tab {
 
@@ -30,22 +31,28 @@ public class Tab {
         for (GuitarNote note : notes) {
             note.randomPosition();
             if (note.getStartTick() == lastTick) {
-                // Check the chord does not already contain this fret position
-                while () {
-                    note.removePosition(pos);
+                // Check that the notes are being played on different strings
+                for (GuitarNote n : chord){
+                    if (note.compareTo(n) == 0){
+                        note.removeCurrentString();
+                    }
                 }
                 chord.add(note);
-            } else {
+            }
+            else {
+                // Notes in chord are sorted by string number before being
+                // added to ArrayList to make tabbing easier
+                Collections.sort(chord);
                 chords.add(chord);
                 chord = new ArrayList<>();
-                chord.add(pos);
+                chord.add(note);
             }
             lastTick = note.getStartTick();
         }
         chords.add(chord);
     }
 
-    public ArrayList<ArrayList<Integer>> getChords(){
-        return chords;
+    public ArrayList<ArrayList<GuitarNote>> getChords(){
+        return new ArrayList<>(chords);
     }
 }
