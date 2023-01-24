@@ -1,6 +1,3 @@
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /** Main file for running and testing code */
 
@@ -10,7 +7,7 @@ public class Main {
         try {
             MidiReader r = new MidiReader("rogero.midi");
             Tab tab = new Tab(r.getNoteSequence());
-            //TabInterface.createTabFile("test", tab);
+            TabInterface.createTabFile("test", tab);
             TabInterface.sendToTAB("test");
         }
         catch (Exception e){

@@ -24,8 +24,9 @@ public class  TabInterface {
     public static boolean createTabFile(String name, Tab tab){
         try(FileWriter writer = new FileWriter("tab_files/" + name + ".tab");) {
             writer.append("$line=o\n").append("{").append(name).append("}\n").append("b\n");
-
+            int counter = 0;
             for(ArrayList<GuitarNote> chord : tab.getChords()){
+                counter++;
                 int lastString = -1;
                 writer.append('0'); // Sets flag
                 for(GuitarNote note : chord){
@@ -33,10 +34,19 @@ public class  TabInterface {
                     for (int i = lastString; i<(note.getStringNumber()-1); i++){
                         writer.append(' ');
                     }
-                    writer.append(note.getFretNumber().toString());
+                    if(note.getFretNumber()<10) {
+                        writer.append(note.getFretNumber().toString());
+                    }
+                    else{
+                        writer.append('N').append(note.getFretNumber().toString());
+                    }
                     lastString = note.getStringNumber();
                 }
                 writer.append('\n');
+                if(counter % 10 == 0){
+                    writer.append("b\n\nb\n");
+                }
+
             }
 
             writer.append("e\n");
