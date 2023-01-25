@@ -7,14 +7,15 @@
 
  * Description: Object containing all fret positions within a guitar tab
 
- * Bug fixes/improvements:
+ * Bug fixes/improvements: Fitness function needs improving
  ************************************************************************************/
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Tab {
+public class Tab implements Comparable<Tab>{
 
     private ArrayList<ArrayList<GuitarNote>> chords;
+    private int fitness;
 
 
     /**
@@ -25,6 +26,7 @@ public class Tab {
     public Tab(GuitarNote[] notes){
         /* Create chords from notes played on the same tick, then add these
         * to the array of positions */
+        fitness = 0; // Fitness is initialised to 0 to be calculated later
         chords = new ArrayList<>();
         ArrayList<GuitarNote> chord = new ArrayList<>();
         long lastTick = 0;
@@ -54,5 +56,33 @@ public class Tab {
 
     public ArrayList<ArrayList<GuitarNote>> getChords(){
         return new ArrayList<>(chords);
+    }
+
+    public int getFitness() {
+        return fitness;
+    }
+
+    /**
+     * Sets the fitness value for the Tab object based on the distance
+     * between notes in chords and the notes previously. The distance
+     * up the fretboard is also taken into account.
+     * @return the fitness value as an integer
+     */
+    public int calculateFitness(){
+        ArrayList<GuitarNote> lastChord = chords.get(0);
+        GuitarNote lastNote = lastChord.get(lastChord.size()-1);
+        for (ArrayList<GuitarNote> chord : chords){
+            for (GuitarNote note : chord){
+                fitness += Math.ceil(note.getFretNumber() / 2.0);
+                fitness += (note.getCurrentPosition() - lastNote.getCurrentPosition()) * 2;
+                lastNote = note;
+            }
+        }
+        return fitness;
+    }
+
+    @Override
+    public int compareTo(Tab t) {
+        return Integer.compare(this.fitness, t.fitness);
     }
 }
