@@ -54,6 +54,16 @@ public class Tab implements Comparable<Tab>{
         chords.add(chord);
     }
 
+    /**
+     * Creates a Tab object from the given chords.
+     * @param chords an ArrayList of GuitarNote ArrayLists to be
+     *               the chords for the created tab.
+     */
+    public Tab(ArrayList<ArrayList<GuitarNote>> chords){
+        fitness = 0;
+        this.chords = chords;
+    }
+
     public ArrayList<ArrayList<GuitarNote>> getChords(){
         return new ArrayList<>(chords);
     }

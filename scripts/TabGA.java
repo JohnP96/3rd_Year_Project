@@ -11,6 +11,7 @@
  * Bug fixes/improvements: Error handling needs to be improved.
  ************************************************************************************/
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class TabGA {
 
@@ -66,9 +67,38 @@ public class TabGA {
         this.mutationRate = mutationRate;
     }
 
+    /**
+     * Pairs the most fit Tab objects (the first half of the population)
+     * into children by combining the first half of the first parent's
+     * chords with the second half of the second parents chords for the
+     * first child and vice versa for the second child.
+     */
     public void crossover(){
-
+        Collections.sort(population);
+        ArrayList<Tab> children = new ArrayList<>();
+        for (int i=0; i<populationSize/2; i = i+2){
+            ArrayList<ArrayList<GuitarNote>> parentOne = population.get(i).getChords();
+            ArrayList<ArrayList<GuitarNote>> parentTwo = population.get(i+1).getChords();
+            int numChords = parentOne.size();
+            ArrayList<ArrayList<GuitarNote>> childOne = new ArrayList<>(parentOne.subList(0, numChords/2));
+            ArrayList<ArrayList<GuitarNote>> childTwo = new ArrayList<>(parentTwo.subList(0, numChords/2));
+            childOne.addAll(parentTwo.subList(numChords/2, numChords));
+            childTwo.addAll(parentOne.subList(numChords/2, numChords));
+            children.add(new Tab(childOne));
+            children.add(new Tab(childTwo));
+        }
+        population = children;
     }
 
-
+    /**
+     * Converges on the most fit tab found by running the crossover
+     * function for the assigned number of generations.
+     */
+    public Tab mostFitTab(){
+        for (int gen=0; gen<numGenerations; gen++){
+            crossover();
+        }
+        Collections.sort(population);
+        return population.get(0);
+    }
 }
