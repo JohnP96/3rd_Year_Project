@@ -9,8 +9,9 @@
  * are encoded as integers with 0 to 6 as the open strings from high to low and
  * continuing in this way up the fretboard to fret 24 (149).
 
- * Bug fixes/improvements:
+ * Bug fixes/improvements: Fix the way octaves work
  ************************************************************************************/
+import java.lang.reflect.Array;
 import java.util.Collections;
 import java.util.Random;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class GuitarNote implements Comparable<GuitarNote>{
     private int currentPosition;
     private int stringNumber;
     private int fretNumber;
+    private int octave;
 
     /**
      * Static arrays containing all possible positions on a 24 fret fretboard
@@ -49,45 +51,165 @@ public class GuitarNote implements Comparable<GuitarNote>{
      * @param startTick A 'long' containing the tick the note begins on.
      */
 
-    public GuitarNote(Notes note, long startTick){
+    public GuitarNote(Notes note, int octave, long startTick){
         possiblePositions = new ArrayList<>();
         this.note = note;
         this.startTick = startTick;
+        this.octave = octave;
+        ArrayList<Integer> octavePositions = new ArrayList<>();
+
+        // Select fret positions within the octave
+        if(octave == 2){
+            for(int i=5; i<53; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=4; i<22; i=i+6){
+                octavePositions.add(i);
+            }
+        }
+        else if(octave == 3){
+            for(int i=53; i<125; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=22; i<94; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=3; i<63; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=2; i<32; i=i+6){
+                octavePositions.add(i);
+            }
+            octavePositions.add(1);
+        }
+        else if(octave == 4){
+            for(int i=125; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=94; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=32; i<104; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=63; i<135; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=7; i<79; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=0; i<48; i=i+6){
+                octavePositions.add(i);
+            }
+        }
+        else if(octave == 5){
+            for(int i=104; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=135; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=79; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=48; i<120; i=i+6){
+                octavePositions.add(i);
+            }
+        }
+        else if(octave == 6){
+            for(int i=144; i>=120; i=i-6){
+                octavePositions.add(i);
+            }
+        }
+        else{
+            for(int i=0; i<150; i++){
+                octavePositions.add(i);
+            }
+        }
+
         if(note == Notes.C){
-            Collections.addAll(possiblePositions, cPositions);
+            for (Integer i : cPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.C_SHARP){
-            Collections.addAll(possiblePositions, cSharpPositions);
+            for (Integer i : cSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.D){
-            Collections.addAll(possiblePositions, dPositions);
+            for (Integer i : dPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.D_SHARP){
-            Collections.addAll(possiblePositions, dSharpPositions);
+            for (Integer i : dSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.E){
-            Collections.addAll(possiblePositions, ePositions);
+            for (Integer i : ePositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.F){
-            Collections.addAll(possiblePositions, fPositions);
+            for (Integer i : fPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.F_SHARP){
-            Collections.addAll(possiblePositions, fSharpPositions);
+            for (Integer i : fSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.G){
-            Collections.addAll(possiblePositions, gPositions);
+            for (Integer i : gPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.G_SHARP){
-            Collections.addAll(possiblePositions, gSharpPositions);
+            for (Integer i : gSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.A){
-            Collections.addAll(possiblePositions, aPositions);
+            for (Integer i : aPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.A_SHARP){
-            Collections.addAll(possiblePositions, aSharpPositions);
+            for (Integer i : aSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
         else if(note == Notes.B){
-            Collections.addAll(possiblePositions, bPositions);
+            for (Integer i : bPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
         }
     }
 
@@ -109,6 +231,10 @@ public class GuitarNote implements Comparable<GuitarNote>{
 
     public int getCurrentPosition() {
         return currentPosition;
+    }
+
+    public int getOctave(){
+        return octave;
     }
 
     public void setCurrentPosition(int currentPosition) {
@@ -145,7 +271,7 @@ public class GuitarNote implements Comparable<GuitarNote>{
     }
 
     public String toString(){
-        return "Note: " + note + ", Start: " + startTick;
+        return "Note: " + note + octave + ", Start: " + startTick;
     }
 
     /**

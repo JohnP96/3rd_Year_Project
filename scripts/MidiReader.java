@@ -44,8 +44,9 @@ public class MidiReader {
             if(message instanceof ShortMessage shortMessage){
                 if (shortMessage.getCommand() == ShortMessage.NOTE_ON) {
                     int key = shortMessage.getData1();
+                    int octave = (key / 12) - 1;
                     /* Here we take the modulo of the key data to give the note value*/
-                    notes.add(new GuitarNote(Notes.values()[key % 12], event.getTick()));
+                    notes.add(new GuitarNote(Notes.values()[key % 12], octave, event.getTick()));
                 }
             }
         }
