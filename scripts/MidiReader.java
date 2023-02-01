@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 23/01/2023
+ * Last edited: 01/02/2023
 
  * Description: Adds functionality for reading notes from a midi sequence to be used
  * by the TabGA class. Does not currently include note timings.

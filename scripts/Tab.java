@@ -3,11 +3,12 @@
 
  * Author: John Pederson
 
- * Last edited: 23/01/2023
+ * Last edited: 01/02/2023
 
  * Description: Object containing all fret positions within a guitar tab
 
- * Bug fixes/improvements: Fitness function needs improving
+ * Bug fixes/improvements: Fitness function needs improving, need to add function
+ * for transcribing out of range octaves
  ************************************************************************************/
 import java.util.ArrayList;
 import java.util.Collections;

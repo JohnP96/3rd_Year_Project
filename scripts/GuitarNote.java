@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 23/01/2023
+ * Last edited: 01/02/2023
 
  * Description: Contains the possible fretboard positions of the given note. These
  * are encoded as integers with 0 to 6 as the open strings from high to low and
