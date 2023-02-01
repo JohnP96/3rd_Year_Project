@@ -221,6 +221,10 @@ public class GuitarNote implements Comparable<GuitarNote>{
         return startTick;
     }
 
+    public Notes getNote(){
+        return note;
+    }
+
     public int getStringNumber() {
         return stringNumber;
     }
@@ -283,6 +287,13 @@ public class GuitarNote implements Comparable<GuitarNote>{
     }
 
     public int compareTo(GuitarNote note) {
-        return Integer.compare(this.stringNumber, note.stringNumber);
+        if(this.octave < note.getOctave()){
+            return -1;
+        }
+        if(this.octave > note.getOctave()){
+            return 1;
+        }
+        // If notes are in same octave check the actual note values
+        return Integer.compare(this.note.ordinal(), note.getNote().ordinal());
     }
 }

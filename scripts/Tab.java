@@ -15,7 +15,7 @@ import java.util.Collections;
 
 public class Tab implements Comparable<Tab>{
 
-    private ArrayList<ArrayList<GuitarNote>> chords;
+    private ArrayList<Chord> chords;
     private int fitness;
 
 
@@ -28,8 +28,7 @@ public class Tab implements Comparable<Tab>{
         /* Create chords from notes played on the same tick, then add these
         * to the array of positions */
         fitness = 0; // Fitness is initialised to 0 to be calculated later
-        chords = new ArrayList<>();
-        ArrayList<GuitarNote> chord = new ArrayList<>();
+        chords = new ArrayList<>();;
         long lastTick = 0;
         for (GuitarNote note : notes) {
             note.randomPosition();

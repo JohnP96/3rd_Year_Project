@@ -3,21 +3,34 @@
 
  * Author: John Pederson
 
- * Last edited: 24/01/2023
+ * Last edited: 01/02/2023
 
  * Description: Object containing fret and string information for all notes played
- * simultaneously - NOT IN USE AT THE MOMENT
+ * simultaneously
 
  * Bug fixes/improvements:
  ************************************************************************************/
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Chord {
 
-    private ArrayList<Integer> notePositions;
-    private ArrayList<Integer> stringNumbers;
-    private ArrayList<Integer> fretNumbers;
+    private ArrayList<GuitarNote> notes;
+    //private ArrayList<Integer> stringNumbers;
+   // private ArrayList<Integer> fretNumbers;
 
-    public Chord(){
+    public Chord(GuitarNote note){
+        notes = new ArrayList<>();
+        notes.add(note);
     }
+
+    public ArrayList<GuitarNote> getNotes() {
+        return new ArrayList<>(notes);
+    }
+
+    public void addNote(GuitarNote note){
+        Collections.sort(notes);
+        
+    }
+
 }
