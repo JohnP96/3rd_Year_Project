@@ -8,8 +8,8 @@ public class Main {
         try {
             MidiReader r = new MidiReader("rogero.midi");
             for (GuitarNote g : r.getNoteSequence()){
-                System.out.println("" + g.getNote() + g.getOctave());
-                System.out.println(g.getPossiblePositions());
+                System.out.println(g);
+
             }
 //            TabGA ga = new TabGA("rogero", 1000, 1000);
 //            Tab tab = ga.mostFitTab();

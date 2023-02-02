@@ -3,13 +3,14 @@
 
  * Author: John Pederson
 
- * Last edited: 01/02/2023
+ * Last edited: 02/02/2023
 
  * Description: Contains the possible fretboard positions of the given note. These
  * are encoded as integers with 0 to 6 as the open strings from high to low and
  * continuing in this way up the fretboard to fret 24 (149).
 
- * Bug fixes/improvements: Fix the way octaves work
+ * Bug fixes/improvements: Fix the way octaves work, add exception for no possible
+ * positions
  ************************************************************************************/
 import java.lang.reflect.Array;
 import java.util.Collections;
@@ -280,10 +281,55 @@ public class GuitarNote implements Comparable<GuitarNote>{
 
     /**
      * Sets a random current position from the possible positions for this note
+     * @return a boolean denoting whether a new position was
+     *         successfully selected
      */
-    public void randomPosition(){
-        Random rand = new Random();
-        setCurrentPosition(possiblePositions.get(rand.nextInt(possiblePositions.size())));
+    public boolean randomPosition(){
+        if(possiblePositions.size() > 0) {
+            Random rand = new Random();
+            setCurrentPosition(possiblePositions.get(rand.nextInt(possiblePositions.size())));
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Assigns a random fret position on the specified string
+     * @param string an integer representing the string
+     * @return a boolean denoting whether a new position was
+     *         successfully selected
+     */
+    public boolean randomPositionOnString(int string){
+        if (string < 0 || string > 5){
+            return false;
+        }
+        ArrayList<Integer> positionsOnString = new ArrayList<>();
+        for (Integer pos : possiblePositions){
+            if (pos % 6 == string){
+                positionsOnString.add(pos);
+            }
+        }
+        if(positionsOnString.size() > 0) {
+            Random rand = new Random();
+            setCurrentPosition(positionsOnString.get(rand.nextInt(positionsOnString.size())));
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Moves the note position to a different string
+     * @param distance the number of strings to move the note by (negative
+     *                 moves higher and positive lower)
+     * @return an integer representing the string that the note has moved to,
+     * a return value of -1 means that the move has failed.
+     */
+    public int moveString(int distance){
+        int newString = this.stringNumber + distance;
+        if(this.randomPositionOnString(newString)){
+            return newString;
+        }
+        return -1;
     }
 
     public int compareTo(GuitarNote note) {

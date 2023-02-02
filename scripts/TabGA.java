@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 02/01/2023
+ * Last edited: 02/02/2023
 
  * Description: Implementation of a genetic algorithm to transcribe guitar tablature
  * from a MIDI file input.
@@ -77,11 +77,11 @@ public class TabGA {
         Collections.sort(population);
         ArrayList<Tab> children = new ArrayList<>();
         for (int i=0; i<populationSize/2; i = i+2){
-            ArrayList<ArrayList<GuitarNote>> parentOne = population.get(i).getChords();
-            ArrayList<ArrayList<GuitarNote>> parentTwo = population.get(i+1).getChords();
+            ArrayList<Chord> parentOne = population.get(i).getChords();
+            ArrayList<Chord> parentTwo = population.get(i+1).getChords();
             int numChords = parentOne.size();
-            ArrayList<ArrayList<GuitarNote>> childOne = new ArrayList<>(parentOne.subList(0, numChords/2));
-            ArrayList<ArrayList<GuitarNote>> childTwo = new ArrayList<>(parentTwo.subList(0, numChords/2));
+            ArrayList<Chord> childOne = new ArrayList<>(parentOne.subList(0, numChords/2));
+            ArrayList<Chord> childTwo = new ArrayList<>(parentTwo.subList(0, numChords/2));
             childOne.addAll(parentTwo.subList(numChords/2, numChords));
             childTwo.addAll(parentOne.subList(numChords/2, numChords));
             children.add(new Tab(childOne));
