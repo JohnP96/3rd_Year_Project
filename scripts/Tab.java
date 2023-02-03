@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 02/02/2023
+ * Last edited: 03/02/2023
 
  * Description: Object containing all fret positions within a guitar tab
 
@@ -12,6 +12,7 @@
  ************************************************************************************/
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Tab implements Comparable<Tab>{
 
@@ -24,7 +25,7 @@ public class Tab implements Comparable<Tab>{
      * positions for each note.
      * @param notes An array of GuitarNote objects.
      */
-    public Tab(GuitarNote[] notes){
+    public Tab(GuitarNote[] notes, Random rand){
         /* Create chords from notes played on the same tick, then add these
         * to the array of positions */
         fitness = 0; // Fitness is initialised to 0 to be calculated later
@@ -32,13 +33,12 @@ public class Tab implements Comparable<Tab>{
         Chord chord = new Chord();
         long lastTick = 0;
         for (GuitarNote note : notes) {
-            note.randomPosition();
             if (note.getStartTick() == lastTick) {
                 chord.addNote(note);
             }
             else {
                 chords.add(chord);
-                chord = new Chord(note);
+                chord = new Chord(note, rand);
             }
             lastTick = note.getStartTick();
         }

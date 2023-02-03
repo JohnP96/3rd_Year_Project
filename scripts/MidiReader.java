@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 01/02/2023
+ * Last edited: 03/02/2023
 
  * Description: Adds functionality for reading notes from a midi sequence to be used
  * by the TabGA class. Does not currently include note timings.
@@ -15,6 +15,7 @@ import javax.sound.midi.*;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class MidiReader {
 
@@ -34,9 +35,11 @@ public class MidiReader {
 
     /**
      * Takes MidiEvents and returns the actual notes
+     * @param rand A Random object to pass to the GuitarNotes which is
+     *             then used to select random fret positions
      * @return Array of GuitarNote objects in order
      */
-    public GuitarNote[] getNoteSequence(){
+    public GuitarNote[] getNoteSequence(Random rand){
         ArrayList<GuitarNote> notes = new ArrayList<>();
         for(int i=0; i< track.size(); i++){
             MidiEvent event = track.get(i);
@@ -46,7 +49,7 @@ public class MidiReader {
                     int key = shortMessage.getData1();
                     int octave = (key / 12) - 1;
                     /* Here we take the modulo of the key data to give the note value*/
-                    notes.add(new GuitarNote(Notes.values()[key % 12], octave, event.getTick()));
+                    notes.add(new GuitarNote(Notes.values()[key % 12], octave, event.getTick(), rand));
                 }
             }
         }

@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 02/02/2023
+ * Last edited: 03/02/2023
 
  * Description: Object containing fret and string information for all notes played
  * simultaneously
@@ -12,17 +12,20 @@
  ************************************************************************************/
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Chord{
 
     private ArrayList<GuitarNote> notes;
+    private Random rand;
     private ArrayList<Integer> occupiedStrings;
 
     public Chord(){
         notes = new ArrayList<>();
     }
 
-    public Chord(GuitarNote note){
+    public Chord(GuitarNote note, Random rand){
+        this.rand = rand;
         notes = new ArrayList<>();
         //occupiedStrings = new ArrayList<>();
         note.randomPosition();
@@ -41,6 +44,7 @@ public class Chord{
      * @return a boolean denoting whether the function was successful
      */
     public boolean addNote(GuitarNote note){
+        // If there are 6 notes being played there is no room for another
         if(notes.size() >= 6){
             return false;
         }
@@ -51,18 +55,45 @@ public class Chord{
         }
         Collections.sort(notes);
         //Collections.sort(occupiedStrings);
-        for(int i = 0; i < notes.size(); i++){
+
+        /* First we check if the note is the highest or lowest and if there is no higher or
+        * lower string available we transpose the preceding notes to lower or higher strings */
+
+        if(note.compareTo(notes.get(0)) <= 0){
+            // If the note cannot be put on a lower string, transpose the others
+            while (!note.randomPositionOnString(notes.get(0).getStringNumber() + 1)){
+                if(!transposeNote(notes.get(0), -1)){
+                    return false;
+                }
+            }
+            notes.add(note);
+            return true;
+        }
+        if(note.compareTo(notes.get(notes.size()-1)) >= 0){
+            // If the note cannot be put on a higher string, transpose the others
+            while (!note.randomPositionOnString(notes.get(notes.size()-1).getStringNumber() - 1)){
+                if(transposeNote(notes.get(notes.size()-1), 1)){
+                    return false;
+                }
+            }
+            notes.add(note);
+            return true;
+        }
+
+        /* If the note is not the highest or lowest we find its place in the list and use that
+        * along with the size of the list to decide whether the strings below or above need
+        * to be transposed */
+
+        for(int i = 1; i < notes.size(); i++){
             // If the new note is lower it replaces the old one in the list
             if(note.compareTo(notes.get(i)) <= 0){
+                // Choose the optimal string for the note to be played on
+                note.randomPositionOnString(chooseString(i));
                 notes.add(i, note);
                 return true;
             }
         }
-        while (!note.randomPositionOnString(notes.get(notes.size()-1).getStringNumber() - 1)){
-            transposeNote(notes.get(notes.size()-1), 1);
-        }
-        notes.add(note);
-        return true;
+        return false;
     }
 
     /**
@@ -74,13 +105,16 @@ public class Chord{
      * @return a boolean denoting whether the function succeeded
      */
     private boolean transposeNote(GuitarNote note, int distance){
+        // Move the note to the specified string
         if(!note.randomPositionOnString(note.getStringNumber()+distance)){
             return false;
         }
         // If the next note is now on the same string, move that note too
-        GuitarNote nextNote = notes.get(notes.indexOf(note)-distance);
-        if(nextNote.getStringNumber() == note.getStringNumber()){
-            return transposeNote(nextNote, distance);
+        if(0 < notes.indexOf(note)-distance && notes.indexOf(note)-distance < notes.size() ) {
+            GuitarNote nextNote = notes.get(notes.indexOf(note) - distance);
+            if (nextNote.getStringNumber() == note.getStringNumber()) {
+                return transposeNote(nextNote, distance);
+            }
         }
         return true;
     }
@@ -95,8 +129,36 @@ public class Chord{
      * to be placed on.
      */
     private int chooseString(int index){
-        if(notes.size() == 1){
-
+        GuitarNote higherNote = notes.get(index);
+        GuitarNote lowerNote = notes.get(index-1);
+        int higherString = higherNote.getStringNumber();
+        int lowerString = lowerNote.getStringNumber();
+        /* If there are empty strings between the higher and lower notes then pick one
+           at  random */
+        if(lowerString - higherString > 1){
+            return rand.nextInt(lowerString - higherString - 1) + higherString + 1;
+        }
+        /* If there are no empty strings then either the higher or the lower note are
+        * transposed, dependent on how many notes are higher or lower */
+        else{
+            if(index < notes.size()/2){
+                if(transposeNote(lowerNote, 1)){
+                    return lowerString;
+                }
+                else{
+                    transposeNote(higherNote, -1);
+                    return higherString;
+                }
+            }
+            else{
+                if(transposeNote(higherNote, -1)){
+                    return higherString;
+                }
+                else{
+                    transposeNote(lowerNote, 1);
+                    return lowerString;
+                }
+            }
         }
     }
 }

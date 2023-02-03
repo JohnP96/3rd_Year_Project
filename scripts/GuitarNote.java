@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 02/02/2023
+ * Last edited: 03/02/2023
 
  * Description: Contains the possible fretboard positions of the given note. These
  * are encoded as integers with 0 to 6 as the open strings from high to low and
@@ -26,6 +26,8 @@ public class GuitarNote implements Comparable<GuitarNote>{
     private int stringNumber;
     private int fretNumber;
     private int octave;
+    private Random rand;
+
 
     /**
      * Static arrays containing all possible positions on a 24 fret fretboard
@@ -52,11 +54,12 @@ public class GuitarNote implements Comparable<GuitarNote>{
      * @param startTick A 'long' containing the tick the note begins on.
      */
 
-    public GuitarNote(Notes note, int octave, long startTick){
+    public GuitarNote(Notes note, int octave, long startTick, Random rand){
         possiblePositions = new ArrayList<>();
         this.note = note;
         this.startTick = startTick;
         this.octave = octave;
+        this.rand = rand;
         ArrayList<Integer> octavePositions = new ArrayList<>();
 
         // Select fret positions within the octave
@@ -286,7 +289,6 @@ public class GuitarNote implements Comparable<GuitarNote>{
      */
     public boolean randomPosition(){
         if(possiblePositions.size() > 0) {
-            Random rand = new Random();
             setCurrentPosition(possiblePositions.get(rand.nextInt(possiblePositions.size())));
             return true;
         }
@@ -309,8 +311,8 @@ public class GuitarNote implements Comparable<GuitarNote>{
                 positionsOnString.add(pos);
             }
         }
+        System.out.println(positionsOnString);
         if(positionsOnString.size() > 0) {
-            Random rand = new Random();
             setCurrentPosition(positionsOnString.get(rand.nextInt(positionsOnString.size())));
             return true;
         }

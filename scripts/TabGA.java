@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 02/02/2023
+ * Last edited: 03/02/2023
 
  * Description: Implementation of a genetic algorithm to transcribe guitar tablature
  * from a MIDI file input.
@@ -12,6 +12,7 @@
  ************************************************************************************/
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class TabGA {
 
@@ -21,6 +22,7 @@ public class TabGA {
     private int numGenerations;
     private ArrayList<Tab> population;
 
+    private Random rand;
 
     public TabGA(){}
 
@@ -35,9 +37,10 @@ public class TabGA {
         this.populationSize = populationSize;
         this.numGenerations = numGenerations;
         population = new ArrayList<>();
+        rand = new Random();
         MidiReader reader = new MidiReader(name + ".midi");
         for (int p=0; p<populationSize; p++){
-            Tab tab = new Tab(reader.getNoteSequence());
+            Tab tab = new Tab(reader.getNoteSequence(rand), rand);
             tab.calculateFitness();
             population.add(tab);
         }

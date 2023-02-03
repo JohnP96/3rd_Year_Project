@@ -1,4 +1,5 @@
 import java.io.File;
+import java.util.Random;
 
 /** Main file for running and testing code */
 
@@ -7,10 +8,14 @@ public class Main {
 
         try {
             MidiReader r = new MidiReader("rogero.midi");
-            for (GuitarNote g : r.getNoteSequence()){
-                System.out.println(g);
-
-            }
+            Random rand = new Random();
+            Tab tab = new Tab(r.getNoteSequence(rand), rand);
+//            GuitarNote g = new GuitarNote(Notes.E, 4, 1, rand);
+//            for(int i=0; i<6; i++){
+//                g.randomPositionOnString(i);
+//                System.out.println(g.getStringNumber());
+//                System.out.println(g.getFretNumber());
+//            }
 //            TabGA ga = new TabGA("rogero", 1000, 1000);
 //            Tab tab = ga.mostFitTab();
 //            TabInterface.createTabFile("Rogero_Test", tab);
