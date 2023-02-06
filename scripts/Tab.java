@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 01/02/2023
+ * Last edited: 03/02/2023
 
  * Description: Object containing all fret positions within a guitar tab
 
@@ -12,10 +12,11 @@
  ************************************************************************************/
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Random;
 
 public class Tab implements Comparable<Tab>{
 
-    private ArrayList<ArrayList<GuitarNote>> chords;
+    private ArrayList<Chord> chords;
     private int fitness;
 
 
@@ -24,31 +25,20 @@ public class Tab implements Comparable<Tab>{
      * positions for each note.
      * @param notes An array of GuitarNote objects.
      */
-    public Tab(GuitarNote[] notes){
+    public Tab(GuitarNote[] notes, Random rand){
         /* Create chords from notes played on the same tick, then add these
         * to the array of positions */
         fitness = 0; // Fitness is initialised to 0 to be calculated later
-        chords = new ArrayList<>();
-        ArrayList<GuitarNote> chord = new ArrayList<>();
+        chords = new ArrayList<>();;
+        Chord chord = new Chord();
         long lastTick = 0;
         for (GuitarNote note : notes) {
-            note.randomPosition();
             if (note.getStartTick() == lastTick) {
-                // Check that the notes are being played on different strings
-                for (GuitarNote n : chord){
-                    if (note.compareTo(n) == 0){
-                        note.removeCurrentString();
-                    }
-                }
-                chord.add(note);
+                chord.addNote(note);
             }
             else {
-                // Notes in chord are sorted by string number before being
-                // added to ArrayList to make tabbing easier
-                Collections.sort(chord);
                 chords.add(chord);
-                chord = new ArrayList<>();
-                chord.add(note);
+                chord = new Chord(note, rand);
             }
             lastTick = note.getStartTick();
         }
@@ -60,12 +50,12 @@ public class Tab implements Comparable<Tab>{
      * @param chords an ArrayList of GuitarNote ArrayLists to be
      *               the chords for the created tab.
      */
-    public Tab(ArrayList<ArrayList<GuitarNote>> chords){
+    public Tab(ArrayList<Chord> chords){
         fitness = 0;
         this.chords = chords;
     }
 
-    public ArrayList<ArrayList<GuitarNote>> getChords(){
+    public ArrayList<Chord> getChords(){
         return new ArrayList<>(chords);
     }
 
@@ -80,10 +70,10 @@ public class Tab implements Comparable<Tab>{
      * @return the fitness value as an integer
      */
     public int calculateFitness(){
-        ArrayList<GuitarNote> lastChord = chords.get(0);
-        GuitarNote lastNote = lastChord.get(lastChord.size()-1);
-        for (ArrayList<GuitarNote> chord : chords){
-            for (GuitarNote note : chord){
+        Chord lastChord = chords.get(0);
+        GuitarNote lastNote = lastChord.getNotes().get(lastChord.getNotes().size()-1);
+        for (Chord chord : chords){
+            for (GuitarNote note : chord.getNotes()){
                 fitness += Math.ceil(note.getFretNumber() / 2.0);
                 fitness += (note.getCurrentPosition() - lastNote.getCurrentPosition()) * 2;
                 lastNote = note;

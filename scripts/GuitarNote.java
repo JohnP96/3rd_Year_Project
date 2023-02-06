@@ -3,13 +3,14 @@
 
  * Author: John Pederson
 
- * Last edited: 01/02/2023
+ * Last edited: 03/02/2023
 
  * Description: Contains the possible fretboard positions of the given note. These
  * are encoded as integers with 0 to 6 as the open strings from high to low and
  * continuing in this way up the fretboard to fret 24 (149).
 
- * Bug fixes/improvements: Fix the way octaves work
+ * Bug fixes/improvements: Fix the way octaves work, add exception for no possible
+ * positions
  ************************************************************************************/
 import java.lang.reflect.Array;
 import java.util.Collections;
@@ -25,6 +26,8 @@ public class GuitarNote implements Comparable<GuitarNote>{
     private int stringNumber;
     private int fretNumber;
     private int octave;
+    private Random rand;
+
 
     /**
      * Static arrays containing all possible positions on a 24 fret fretboard
@@ -51,11 +54,12 @@ public class GuitarNote implements Comparable<GuitarNote>{
      * @param startTick A 'long' containing the tick the note begins on.
      */
 
-    public GuitarNote(Notes note, int octave, long startTick){
+    public GuitarNote(Notes note, int octave, long startTick, Random rand){
         possiblePositions = new ArrayList<>();
         this.note = note;
         this.startTick = startTick;
         this.octave = octave;
+        this.rand = rand;
         ArrayList<Integer> octavePositions = new ArrayList<>();
 
         // Select fret positions within the octave
@@ -221,6 +225,10 @@ public class GuitarNote implements Comparable<GuitarNote>{
         return startTick;
     }
 
+    public Notes getNote(){
+        return note;
+    }
+
     public int getStringNumber() {
         return stringNumber;
     }
@@ -276,13 +284,64 @@ public class GuitarNote implements Comparable<GuitarNote>{
 
     /**
      * Sets a random current position from the possible positions for this note
+     * @return a boolean denoting whether a new position was
+     *         successfully selected
      */
-    public void randomPosition(){
-        Random rand = new Random();
-        setCurrentPosition(possiblePositions.get(rand.nextInt(possiblePositions.size())));
+    public boolean randomPosition(){
+        if(possiblePositions.size() > 0) {
+            setCurrentPosition(possiblePositions.get(rand.nextInt(possiblePositions.size())));
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Assigns a random fret position on the specified string
+     * @param string an integer representing the string
+     * @return a boolean denoting whether a new position was
+     *         successfully selected
+     */
+    public boolean randomPositionOnString(int string){
+        if (string < 0 || string > 5){
+            return false;
+        }
+        ArrayList<Integer> positionsOnString = new ArrayList<>();
+        for (Integer pos : possiblePositions){
+            if (pos % 6 == string){
+                positionsOnString.add(pos);
+            }
+        }
+        System.out.println(positionsOnString);
+        if(positionsOnString.size() > 0) {
+            setCurrentPosition(positionsOnString.get(rand.nextInt(positionsOnString.size())));
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * Moves the note position to a different string
+     * @param distance the number of strings to move the note by (negative
+     *                 moves higher and positive lower)
+     * @return an integer representing the string that the note has moved to,
+     * a return value of -1 means that the move has failed.
+     */
+    public int moveString(int distance){
+        int newString = this.stringNumber + distance;
+        if(this.randomPositionOnString(newString)){
+            return newString;
+        }
+        return -1;
     }
 
     public int compareTo(GuitarNote note) {
-        return Integer.compare(this.stringNumber, note.stringNumber);
+        if(this.octave < note.getOctave()){
+            return -1;
+        }
+        if(this.octave > note.getOctave()){
+            return 1;
+        }
+        // If notes are in same octave check the actual note values
+        return Integer.compare(this.note.ordinal(), note.getNote().ordinal());
     }
 }

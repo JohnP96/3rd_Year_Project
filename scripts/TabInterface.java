@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 23/01/2023
+ * Last edited: 02/02/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
@@ -25,11 +25,11 @@ public class  TabInterface {
         try(FileWriter writer = new FileWriter("tab_files/" + name + ".tab");) {
             writer.append("$line=o\n").append("{").append(name).append("}\n").append("b\n");
             int counter = 0;
-            for(ArrayList<GuitarNote> chord : tab.getChords()){
+            for(Chord chord : tab.getChords()){
                 counter++;
                 int lastString = -1;
                 writer.append('0'); // Sets flag
-                for(GuitarNote note : chord){
+                for(GuitarNote note : chord.getNotes()){
                     /* Add spaces for un-played strings*/
                     for (int i = lastString; i<(note.getStringNumber()-1); i++){
                         writer.append(' ');
