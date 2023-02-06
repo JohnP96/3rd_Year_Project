@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 03/02/2023
+ * Last edited: 06/02/2023
 
  * Description: Object containing fret and string information for all notes played
  * simultaneously
@@ -18,19 +18,17 @@ public class Chord{
 
     private ArrayList<GuitarNote> notes;
     private Random rand;
-    private ArrayList<Integer> occupiedStrings;
 
-    public Chord(){
+    public Chord(Random rand){
         notes = new ArrayList<>();
+        this.rand = rand;
     }
 
     public Chord(GuitarNote note, Random rand){
         this.rand = rand;
         notes = new ArrayList<>();
-        //occupiedStrings = new ArrayList<>();
         note.randomPosition();
         notes.add(note);
-        //occupiedStrings.add(note.getStringNumber());
     }
 
     public ArrayList<GuitarNote> getNotes() {
@@ -54,7 +52,6 @@ public class Chord{
             return true;
         }
         Collections.sort(notes);
-        //Collections.sort(occupiedStrings);
 
         /* First we check if the note is the highest or lowest and if there is no higher or
         * lower string available we transpose the preceding notes to lower or higher strings */
@@ -66,7 +63,7 @@ public class Chord{
                     return false;
                 }
             }
-            notes.add(note);
+            notes.add(0, note);
             return true;
         }
         if(note.compareTo(notes.get(notes.size()-1)) >= 0){

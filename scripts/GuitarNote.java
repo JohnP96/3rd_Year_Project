@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 03/02/2023
+ * Last edited: 06/02/2023
 
  * Description: Contains the possible fretboard positions of the given note. These
  * are encoded as integers with 0 to 6 as the open strings from high to low and
@@ -311,7 +311,6 @@ public class GuitarNote implements Comparable<GuitarNote>{
                 positionsOnString.add(pos);
             }
         }
-        System.out.println(positionsOnString);
         if(positionsOnString.size() > 0) {
             setCurrentPosition(positionsOnString.get(rand.nextInt(positionsOnString.size())));
             return true;

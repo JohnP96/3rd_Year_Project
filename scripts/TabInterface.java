@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 02/02/2023
+ * Last edited: 06/02/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
@@ -13,7 +13,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
 
 public class  TabInterface {
 
@@ -76,9 +75,9 @@ public class  TabInterface {
             // Print console output from TAB software (in case of errors)
             BufferedReader inputStream = new BufferedReader(new InputStreamReader(p.getInputStream()));
             String line = null;
-            while ((line = inputStream.readLine()) != null)
-                System.out.println(line);
-
+//            while ((line = inputStream.readLine()) != null) {
+//                System.out.println(line);
+//            }
             p.waitFor();
             if(p.exitValue() == 0){ // TAB returns 0 if successful and -1 on failure
                 return true;

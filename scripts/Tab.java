@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 03/02/2023
+ * Last edited: 06/02/2023
 
  * Description: Object containing all fret positions within a guitar tab
 
@@ -30,7 +30,7 @@ public class Tab implements Comparable<Tab>{
         * to the array of positions */
         fitness = 0; // Fitness is initialised to 0 to be calculated later
         chords = new ArrayList<>();;
-        Chord chord = new Chord();
+        Chord chord = new Chord(rand);
         long lastTick = 0;
         for (GuitarNote note : notes) {
             if (note.getStartTick() == lastTick) {
