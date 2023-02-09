@@ -3,16 +3,14 @@
 
  * Author: John Pederson
 
- * Last edited: 06/02/2023
+ * Last edited: 09/02/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
  * Bug fixes/improvements: Error handling
  ************************************************************************************/
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
+import java.io.*;
+import java.util.Scanner;
 
 public class  TabInterface {
 
@@ -90,7 +88,24 @@ public class  TabInterface {
         return false;
     }
 
+
     /**
+     * Compares a generated guitar .tab file with the original lute .tab file.
+     * @param guitarTabName A string denoting the name of the guitar .tab file
+     * @param luteTabName A string denoting the name of the lute .tab file
+     * @return An integer denoting the number of differences between the tabs.
+     * Returns max integer value if they are different lengths.
+     */
+    public static int compareTabs(String guitarTabName, String luteTabName) throws FileNotFoundException {
+        int score = 0;
+        File guitarTab = new File("tab_files/" + guitarTabName + ".tab");
+        File luteTab = new File("tab_files/" + luteTabName + ".tab");
+        Scanner guitarFileScanner = new Scanner(guitarTab, "\n");
+        Scanner luteFileScanner = new Scanner(guitarTab, "\n");
+        return score;
+    }
+
+    /*
      * POSSIBLE IMPLEMENTATION FOR ASSIGNING NEW NAME TO TAB OUTPUT -  MAY FINISH LATER
      * Sends the generated .tab file to the TAB software to be converted into
      * readable tablature

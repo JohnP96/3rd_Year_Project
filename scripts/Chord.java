@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 06/02/2023
+ * Last edited: 08/02/2023
 
  * Description: Object containing fret and string information for all notes played
  * simultaneously
@@ -32,6 +32,9 @@ public class Chord{
     }
 
     public ArrayList<GuitarNote> getNotes() {
+        // Here we ensure the notes are returned in order from highest to lowest
+        Collections.sort(notes);
+        Collections.reverse(notes);
         return new ArrayList<>(notes);
     }
 
@@ -157,5 +160,14 @@ public class Chord{
                 }
             }
         }
+    }
+
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        for (GuitarNote n : notes){
+            str.append(n.getNote()).append(n.getOctave()).append(" Fret: ").append(n.getFretNumber())
+                    .append(" String: ").append(n.getStringNumber()).append('\n');
+        }
+        return str.toString();
     }
 }
