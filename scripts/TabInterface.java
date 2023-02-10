@@ -3,14 +3,17 @@
 
  * Author: John Pederson
 
- * Last edited: 09/02/2023
+ * Last edited: 10/02/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
  * Bug fixes/improvements: Error handling
  ************************************************************************************/
 import java.io.*;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
 public class  TabInterface {
 
@@ -100,8 +103,55 @@ public class  TabInterface {
         int score = 0;
         File guitarTab = new File("tab_files/" + guitarTabName + ".tab");
         File luteTab = new File("tab_files/" + luteTabName + ".tab");
-        Scanner guitarFileScanner = new Scanner(guitarTab, "\n");
-        Scanner luteFileScanner = new Scanner(guitarTab, "\n");
+        Scanner guitarFileScanner = new Scanner(guitarTab );
+        Scanner luteFileScanner = new Scanner(luteTab);
+        guitarFileScanner.useDelimiter("\n");
+        luteFileScanner.useDelimiter("\n");
+        String luteLine = "";
+        String guitarLine = "";
+        Pattern chordLine = Pattern.compile("^0");
+        while(guitarFileScanner.hasNextLine()){
+            // Ignores unimportant lines like those for bar breaks etc.
+            while(!guitarFileScanner.hasNext(chordLine)){
+                guitarFileScanner.next();
+            }
+            guitarLine = guitarFileScanner.next(chordLine);
+
+            while(luteFileScanner.hasNext()){
+                luteLine = luteFileScanner.next();
+                // Same as before but harder due to non-constant flag values
+                while(luteLine.length() < 2 || luteLine.toCharArray()[0] == '-'
+                        || luteLine.toCharArray()[0] == '{'){
+                    luteLine = luteFileScanner.next();
+                }
+            }
+
+            char[] guitarChars = guitarLine.toCharArray();
+            char[] luteChars = luteLine.toCharArray();
+            int flagAllowance = 0; // Number of characters to skip (for the flag values)
+            if(luteChars[0] == '#'){
+                flagAllowance = 1;
+            }
+            for(int i=1; i<guitarChars.length; i++){
+                int guitarUnicode = guitarChars[i];
+                int luteUnicode = luteChars[i+flagAllowance];
+                if(guitarUnicode == 78){
+                    i = i+2;
+                    guitarUnicode = guitarChars[i];
+                    for(int j=0; j<3; j++){
+                        if(guitarUnicode != luteUnicode - 108){
+                            score ++;
+                        }
+                    }
+                }
+                else {
+                    if (guitarUnicode != luteUnicode - 30) {
+                        score++;
+                    }
+                }
+            }
+        }
+
         return score;
     }
 
