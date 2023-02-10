@@ -110,12 +110,23 @@ public class  TabInterface {
         String luteLine = "";
         String guitarLine = "";
         Pattern chordLine = Pattern.compile("^0");
+        boolean fileEnd = false;
         while(guitarFileScanner.hasNextLine()){
             // Ignores unimportant lines like those for bar breaks etc.
-            while(!guitarFileScanner.hasNext(chordLine)){
-                guitarFileScanner.next();
+            while(guitarFileScanner.hasNext(chordLine)){
+                if(guitarFileScanner.hasNext()){
+                    System.out.println((guitarFileScanner.next()));
+                }
+                else{
+                    fileEnd = true;
+                    break;
+                }
             }
-            guitarLine = guitarFileScanner.next(chordLine);
+            if(fileEnd){
+                break;
+            }
+            guitarLine = guitarFileScanner.next();
+            System.out.println(guitarLine);
 
             while(luteFileScanner.hasNext()){
                 luteLine = luteFileScanner.next();
@@ -134,7 +145,7 @@ public class  TabInterface {
             }
             for(int i=1; i<guitarChars.length; i++){
                 int guitarUnicode = guitarChars[i];
-                int luteUnicode = luteChars[i+flagAllowance];
+                int luteUnicode = luteChars[i+flagAllowance]; // Add check beforehand as length of luteChars and guitarChars may be different. Check length first. If length is not the same, tabs aren't either
                 if(guitarUnicode == 78){
                     i = i+2;
                     guitarUnicode = guitarChars[i];

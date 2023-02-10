@@ -21,8 +21,6 @@ public class Main {
         }
         catch (Exception e){
             e.printStackTrace();
-            e.getCause();
-            System.out.println(e.getMessage());
         }
     }
 }
