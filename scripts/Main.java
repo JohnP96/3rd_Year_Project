@@ -1,5 +1,6 @@
 import java.io.File;
 import java.util.Random;
+import java.util.Scanner;
 
 /** Main file for running and testing code */
 
@@ -16,8 +17,8 @@ public class Main {
 //            }
 //            TabInterface.createTabFile("Rogero_Test", tab);
 //            TabInterface.sendToTAB("Rogero_Test");
-            System.out.println(TabInterface.compareTabs("Rogero_Test", "rogero"));
-
+//            TabInterface.luteToGuitar("rogero");
+            System.out.println(TabInterface.compareTabs("Rogero_Test", "rogero_original_guitar"));
         }
         catch (Exception e){
             e.printStackTrace();

@@ -3,11 +3,11 @@
 
  * Author: John Pederson
 
- * Last edited: 10/02/2023
+ * Last edited: 12/02/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
- * Bug fixes/improvements: Error handling
+ * Bug fixes/improvements: Error handling, add comments for luteToGuitar and compareTab
  ************************************************************************************/
 import java.io.*;
 import java.util.InputMismatchException;
@@ -21,8 +21,8 @@ public class  TabInterface {
      * Creates a .tab file from the Tab object provided
      * @return A boolean for whether the function was successful or not
      */
-    public static boolean createTabFile(String name, Tab tab){
-        try(FileWriter writer = new FileWriter("tab_files/" + name + ".tab");) {
+    public static boolean createTabFile(String name, Tab tab) throws IOException{
+        try(FileWriter writer = new FileWriter("tab_files/" + name + ".tab")) {
             writer.append("$line=o\n").append("{").append(name).append("}\n").append("b\n");
             int counter = 0;
             for(Chord chord : tab.getChords()){
@@ -50,9 +50,6 @@ public class  TabInterface {
             }
 
             writer.append("e\n");
-        }
-        catch(Exception e){
-            e.printStackTrace();
         }
         return false;
     }
@@ -94,76 +91,83 @@ public class  TabInterface {
 
     /**
      * Compares a generated guitar .tab file with the original lute .tab file.
-     * @param guitarTabName A string denoting the name of the guitar .tab file
-     * @param luteTabName A string denoting the name of the lute .tab file
+     * @param generatedTabName A string denoting the name of the guitar .tab file
+     * @param originalTabName A string denoting the name of the lute .tab file
      * @return An integer denoting the number of differences between the tabs.
      * Returns max integer value if they are different lengths.
      */
-    public static int compareTabs(String guitarTabName, String luteTabName) throws FileNotFoundException {
+    public static int compareTabs(String generatedTabName, String originalTabName) throws FileNotFoundException {
         int score = 0;
-        File guitarTab = new File("tab_files/" + guitarTabName + ".tab");
-        File luteTab = new File("tab_files/" + luteTabName + ".tab");
-        Scanner guitarFileScanner = new Scanner(guitarTab );
-        Scanner luteFileScanner = new Scanner(luteTab);
-        guitarFileScanner.useDelimiter("\n");
-        luteFileScanner.useDelimiter("\n");
-        String luteLine = "";
-        String guitarLine = "";
-        Pattern chordLine = Pattern.compile("^0");
-        boolean fileEnd = false;
-        while(guitarFileScanner.hasNextLine()){
-            // Ignores unimportant lines like those for bar breaks etc.
-            while(guitarFileScanner.hasNext(chordLine)){
-                if(guitarFileScanner.hasNext()){
-                    System.out.println((guitarFileScanner.next()));
-                }
-                else{
-                    fileEnd = true;
-                    break;
-                }
-            }
-            if(fileEnd){
-                break;
-            }
-            guitarLine = guitarFileScanner.next();
-            System.out.println(guitarLine);
 
-            while(luteFileScanner.hasNext()){
-                luteLine = luteFileScanner.next();
-                // Same as before but harder due to non-constant flag values
-                while(luteLine.length() < 2 || luteLine.toCharArray()[0] == '-'
-                        || luteLine.toCharArray()[0] == '{'){
-                    luteLine = luteFileScanner.next();
-                }
+        File generatedTab = new File("tab_files/" + generatedTabName + ".tab");
+        File originalTab = new File("tab_files/" + originalTabName + ".tab");
+        Scanner genScan = new Scanner(generatedTab );
+        Scanner origScan = new Scanner(originalTab);
+        genScan.useDelimiter("\n");
+        origScan.useDelimiter("\n");
+        String genLine;
+        String origLine;
+        while(genScan.hasNext() && origScan.hasNext()){
+            genLine = genScan.next();
+            origLine = origScan.next();
+            if(!genLine.equals(origLine)){
+                score++;
             }
-
-            char[] guitarChars = guitarLine.toCharArray();
-            char[] luteChars = luteLine.toCharArray();
-            int flagAllowance = 0; // Number of characters to skip (for the flag values)
-            if(luteChars[0] == '#'){
-                flagAllowance = 1;
-            }
-            for(int i=1; i<guitarChars.length; i++){
-                int guitarUnicode = guitarChars[i];
-                int luteUnicode = luteChars[i+flagAllowance]; // Add check beforehand as length of luteChars and guitarChars may be different. Check length first. If length is not the same, tabs aren't either
-                if(guitarUnicode == 78){
-                    i = i+2;
-                    guitarUnicode = guitarChars[i];
-                    for(int j=0; j<3; j++){
-                        if(guitarUnicode != luteUnicode - 108){
-                            score ++;
-                        }
-                    }
-                }
-                else {
-                    if (guitarUnicode != luteUnicode - 30) {
-                        score++;
-                    }
-                }
-            }
+        }
+        if(genScan.hasNext() || origScan.hasNext()){
+            score = Integer.MAX_VALUE;
         }
 
         return score;
+    }
+
+    public static void luteToGuitar(String tabName) throws FileNotFoundException, IOException{
+        try(FileWriter writer = new FileWriter("tab_files/" + tabName + "_original_guitar.tab")) {
+            writer.append("$line=o\n").append("{").append(tabName).append("}\n").append("b\n");
+            File luteTab = new File("tab_files/" + tabName + ".tab");
+            Scanner luteFileScanner = new Scanner(luteTab);
+            luteFileScanner.useDelimiter("\n");
+            String line = "";
+            char[] lineChars;
+            int counter = 0;
+            while (luteFileScanner.hasNext()) {
+                line = luteFileScanner.next();
+                // Ignores unimportant lines like those for bar breaks etc.
+                if(line.length() > 2 && line.toCharArray()[0] != '-'
+                        && line.toCharArray()[0] != '{') {
+                    counter++;
+                    lineChars = line.trim().toCharArray();
+                    int flag = 1;
+                    if (lineChars[0] == '#') {
+                        flag = 2;
+                    }
+                    writer.append('0');
+                    for (int i = flag; i < lineChars.length; i++) {
+                        char character = lineChars[i];
+                        if (character != '.') {
+                            int unicode = lineChars[i];
+                            if (unicode != 32){
+                                if (unicode < 104) {
+                                    character = (char) (unicode - 46);
+                                } else if (unicode < 106) {
+                                    writer.append("N1");
+                                    character = (char) (unicode - 56);
+                                } else if (unicode > 106) {
+                                    writer.append("N1");
+                                    character = (char) (unicode - 57);
+                                }
+                            }
+                            writer.append(character);
+                        }
+                    }
+                    writer.append('\n');
+                    if(counter % 10 == 0){
+                        writer.append("b\n\nb\n");
+                    }
+                }
+            }
+            writer.append('e');
+        }
     }
 
     /*
