@@ -25,7 +25,7 @@ public class Tab implements Comparable<Tab>{
      * positions for each note.
      * @param notes An array of GuitarNote objects.
      */
-    public Tab(GuitarNote[] notes, Random rand){
+    public Tab(GuitarNote[] notes, Random rand) throws Exception{
         /* Create chords from notes played on the same tick, then add these
         * to the array of positions */
         fitness = 0; // Fitness is initialised to 0 to be calculated later
@@ -34,7 +34,10 @@ public class Tab implements Comparable<Tab>{
         long lastTick = 0;
         for (GuitarNote note : notes) {
             if (note.getStartTick() == lastTick) {
-                chord.addNote(note);
+                if(!chord.addNote(note)){
+                    System.out.println("Error adding note: " + note);
+                    throw new Exception("I want to kill myself what is wrong with this note");
+                }
             }
             else {
                 chords.add(chord);

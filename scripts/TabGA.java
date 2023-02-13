@@ -3,12 +3,13 @@
 
  * Author: John Pederson
 
- * Last edited: 03/02/2023
+ * Last edited: 13/02/2023
 
  * Description: Implementation of a genetic algorithm to transcribe guitar tablature
  * from a MIDI file input.
 
- * Bug fixes/improvements: Error handling needs to be improved.
+ * Bug fixes/improvements: Error handling needs to be improved. Add random break
+ * point and parent selection for crossover. Add mutation.
  ************************************************************************************/
 import java.util.ArrayList;
 import java.util.Collections;
