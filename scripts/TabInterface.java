@@ -110,7 +110,7 @@ public class  TabInterface {
         while(genScan.hasNext() && origScan.hasNext()){
             genLine = genScan.next();
             origLine = origScan.next();
-            if(!genLine.equals(origLine)){
+            if(!origLine.equals(genLine.trim())){
                 differences++;
             }
         }
@@ -155,23 +155,39 @@ public class  TabInterface {
                         flag = 2;
                     }
                     writer.append('0');
-
+                    int stringNum = -1;
                     for (int i = flag; i < lineChars.length; i++) {
+                        stringNum++;
                         char character = lineChars[i];
 
                         if (character != '.') {
                             int unicode = lineChars[i];
 
-                            if (unicode != 32){
+                            if (unicode != 32) {
 
-                                if (unicode < 104) {
-                                    character = (char) (unicode - 46);
-                                } else if (unicode < 106) {
-                                    writer.append("N1");
-                                    character = (char) (unicode - 56);
-                                } else if (unicode > 106) {
-                                    writer.append("N1");
-                                    character = (char) (unicode - 57);
+                                /* The lute is tuned 3 semitones higher than a guitar one every string
+                                * but the 3rd highest, which is tuned 2 semitones higher */
+                                if (stringNum != 2){
+                                    if (unicode < 104) {
+                                        character = (char) (unicode - 46);
+                                    } else if (unicode < 106) {
+                                        writer.append("N1");
+                                        character = (char) (unicode - 56);
+                                    } else if (unicode > 106) {
+                                        writer.append("N1");
+                                        character = (char) (unicode - 57);
+                                    }
+                                }
+                                else{
+                                    if (unicode < 104) {
+                                        character = (char) (unicode - 47);
+                                    } else if (unicode < 106) {
+                                        writer.append("N1");
+                                        character = (char) (unicode - 57);
+                                    } else if (unicode > 106) {
+                                        writer.append("N1");
+                                        character = (char) (unicode - 58);
+                                    }
                                 }
                             }
                             writer.append(character);

@@ -20,16 +20,6 @@ public class Main {
 //            TabInterface.sendToTAB("Rogero_Test");
             System.out.println(TabInterface.compareTabs("Rogero_Test", "rogero_original_guitar"));
 //            Random rand = new Random();
-//            GuitarNote n = new GuitarNote(Notes.G, 3, 0, rand);
-//            GuitarNote a = new GuitarNote(Notes.A, 2, 0, rand);
-//            GuitarNote b = new GuitarNote(Notes.D, 3, 0, rand);
-//            Chord c = new Chord(n, rand);
-//            System.out.println(c.addNote(a));
-//            System.out.println(c.addNote(b));
-//            System.out.println(c);
-//            for (GuitarNote note:c.getNotes()) {
-//                System.out.println(note);
-////            }
 //            Integer[][] notes = new Integer[12][];
 //            notes[0] = GuitarNote.cPositions;
 //            notes[1] = GuitarNote.cSharpPositions;
@@ -62,6 +52,22 @@ public class Main {
 //            for(Integer m : missing){
 //                System.out.println(m);
 //                System.out.println("String " + m%6 + " Fret " + (int)(m/6));
+//            }
+//
+//            File generatedTab = new File("tab_files/" + "Rogero_Test" + ".tab");
+//            File originalTab = new File("tab_files/" + "rogero_original_guitar" + ".tab");
+//            Scanner genScan = new Scanner(generatedTab );
+//            Scanner origScan = new Scanner(originalTab);
+//            genScan.useDelimiter("\n");
+//            origScan.useDelimiter("\n");
+//            while(genScan.hasNext() && origScan.hasNext()){
+//                String genLine = genScan.next();
+//                String origLine = origScan.next();
+//                System.out.println(genLine);
+//                System.out.println(origLine);
+//                System.out.println(genLine.equals(origLine));
+//                System.out.println(genLine.equals(origLine.trim()));
+//                System.out.println(origLine.equals(genLine.trim()));
 //            }
         }
         catch (Exception e){
