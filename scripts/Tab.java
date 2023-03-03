@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 06/02/2023
+ * Last edited: 03/03/2023
 
  * Description: Object containing all fret positions within a guitar tab
 
@@ -24,19 +24,20 @@ public class Tab implements Comparable<Tab>{
      * Construct a Tab object from an array of GuitarNote objects, selecting random
      * positions for each note.
      * @param notes An array of GuitarNote objects.
+     * @param rand A Random object to be passed down to the Chords
      */
     public Tab(GuitarNote[] notes, Random rand) throws Exception{
         /* Create chords from notes played on the same tick, then add these
         * to the array of positions */
         fitness = 0; // Fitness is initialised to 0 to be calculated later
-        chords = new ArrayList<>();;
+        chords = new ArrayList<>();
+
         Chord chord = new Chord(rand);
         long lastTick = 0;
         for (GuitarNote note : notes) {
             if (note.getStartTick() == lastTick) {
                 if(!chord.addNote(note)){
-                    System.out.println("Error adding note: " + note);
-                    throw new Exception("I want to kill myself what is wrong with this note");
+                    throw new Exception("Error adding note: " + note);
                 }
             }
             else {
@@ -77,8 +78,8 @@ public class Tab implements Comparable<Tab>{
         GuitarNote lastNote = lastChord.getNotes().get(lastChord.getNotes().size()-1);
         for (Chord chord : chords){
             for (GuitarNote note : chord.getNotes()){
-                fitness += Math.ceil(note.getFretNumber() / 2.0);
-                fitness += (note.getCurrentPosition() - lastNote.getCurrentPosition()) * 2;
+                fitness -= Math.ceil(note.getFretNumber() / 2.0);
+                fitness -= (note.getCurrentPosition() - lastNote.getCurrentPosition()) * 2;
                 lastNote = note;
             }
         }
@@ -87,6 +88,7 @@ public class Tab implements Comparable<Tab>{
 
     @Override
     public int compareTo(Tab t) {
-        return Integer.compare(this.fitness, t.fitness);
+        // Allows Tabs to be sorted in descending order of fitness
+        return Integer.compare(t.fitness, this.fitness);
     }
 }

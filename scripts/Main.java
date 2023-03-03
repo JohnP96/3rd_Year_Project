@@ -16,9 +16,10 @@ public class Main {
 //                    System.out.println(note.getFretNumber() + " " + note.getStringNumber());
 //                }
 //            }
-//            TabInterface.createTabFile("Rogero_Test", tab);
-//            TabInterface.sendToTAB("Rogero_Test");
-            System.out.println(TabInterface.compareTabs("Rogero_Test", "rogero_original_guitar"));
+//            TabInterface.createTabFile("Rogero_Truncated", tab);
+//            TabInterface.sendToTAB("Rogero_Truncated");
+//            System.out.println(TabInterface.compareTabs("Rogero_Test", "rogero_original_guitar"));
+//            System.out.println(TabInterface.compareTabs("Rogero_Truncated", "rogero_original_guitar"));
 //            Random rand = new Random();
 //            Integer[][] notes = new Integer[12][];
 //            notes[0] = GuitarNote.cPositions;

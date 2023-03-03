@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 15/02/2023
+ * Last edited: 03/03/2023
 
  * Description: Object containing fret and string information for all notes played
  * simultaneously
@@ -47,7 +47,7 @@ public class Chord{
     public boolean addNote(GuitarNote note) throws Exception{
         // If there are 6 notes being played there is no room for another
         if(notes.size() >= 6){
-            System.out.println("Too many notes");
+//            System.out.println("Too many notes");
             return false;
         }
         if(notes.size() == 0){
@@ -55,7 +55,7 @@ public class Chord{
                 throw new Exception("No possible positions for note: " + note);
             }
             notes.add(note);
-            System.out.println("First note added on string " + note.getStringNumber() + " fret " + note.getFretNumber());
+//            System.out.println("First note added on string " + note.getStringNumber() + " fret " + note.getFretNumber());
             return true;
         }
         Collections.sort(notes);
@@ -65,10 +65,10 @@ public class Chord{
         GuitarNote lowestNote = notes.get(0);
         int count = 1;
         if(note.compareTo(lowestNote) <= 0){
-            System.out.println("Note " + note.getNote() + note.getOctave() + " is lower than " + lowestNote.getNote() + lowestNote.getOctave());
+//            System.out.println("Note " + note.getNote() + note.getOctave() + " is lower than " + lowestNote.getNote() + lowestNote.getOctave());
             // If the note cannot be put on a lower string, transpose the others
             while (!note.randomPositionOnString(lowestNote.getStringNumber() + count)){
-                System.out.println("Failed to put note on string " + (lowestNote.getStringNumber() + count));
+//                System.out.println("Failed to put note on string " + (lowestNote.getStringNumber() + count));
                 // Attempt to pick a lower string before transposing
                 if(lowestNote.getStringNumber() + count < 5){
                     count++;
@@ -81,13 +81,13 @@ public class Chord{
                 }
             }
             notes.add(0, note);
-            System.out.println("Note added on string " + note.getStringNumber() + " fret " + note.getFretNumber());
+//            System.out.println("Note added on string " + note.getStringNumber() + " fret " + note.getFretNumber());
             return true;
         }
 
         GuitarNote highestNote = notes.get(notes.size()-1);
         if(note.compareTo(highestNote) >= 0){
-            System.out.println("Note " + note.getNote() + note.getOctave() +  " is higher than " + highestNote.getNote() + highestNote.getOctave());
+//            System.out.println("Note " + note.getNote() + note.getOctave() +  " is higher than " + highestNote.getNote() + highestNote.getOctave());
             // If the note cannot be put on a higher string, transpose the others
             while (!note.randomPositionOnString(highestNote.getStringNumber() - count)){
                 // Attempt to pick a higher string before transposing
@@ -102,7 +102,7 @@ public class Chord{
                 }
             }
             notes.add(note);
-            System.out.println("Note added on string " + note.getStringNumber() + " fret " + note.getFretNumber());
+//            System.out.println("Note added on string " + note.getStringNumber() + " fret " + note.getFretNumber());
             return true;
         }
 
@@ -116,7 +116,7 @@ public class Chord{
                 // Choose the optimal string for the note to be played on
                 note.randomPositionOnString(chooseString(i));
                 notes.add(i, note);
-                System.out.println("Note added on string " + note.getStringNumber() + " fret " + note.getFretNumber());
+//                System.out.println("Note added on string " + note.getStringNumber() + " fret " + note.getFretNumber());
                 return true;
             }
         }
@@ -134,7 +134,7 @@ public class Chord{
     private boolean transposeNote(GuitarNote note, int distance){
         // Move the note to the specified string
         if(!note.randomPositionOnString(note.getStringNumber()+distance)){
-            System.out.println("Couldn't transpose note " + note.getNote() + " in Chord: " + this);
+//            System.out.println("Couldn't transpose note " + note.getNote() + " in Chord: " + this);
             return false;
         }
         // If the next note is now on the same string, move that note too
@@ -144,7 +144,7 @@ public class Chord{
                 return transposeNote(nextNote, distance);
             }
         }
-        System.out.println(note.getNote() + " Note moved to string " + note.getStringNumber() + " fret " + note.getFretNumber());
+//        System.out.println(note.getNote() + " Note moved to string " + note.getStringNumber() + " fret " + note.getFretNumber());
         return true;
     }
 
