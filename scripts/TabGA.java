@@ -18,7 +18,7 @@ import java.util.Random;
 public class TabGA {
     private String name;
     private int populationSize;
-    private int mutationRate;
+    private double mutationRate; // Percentage chance of mutation for each individual
     private int numGenerations;
     private ArrayList<Tab> population;
 
@@ -33,10 +33,11 @@ public class TabGA {
      *             the name of the output.
      * @param populationSize the number of Tab objects in the initial population.
      */
-    public TabGA(String name, int populationSize, int numGenerations) throws Exception{
+    public TabGA(String name, int populationSize, int numGenerations, double mutationRate) throws Exception{
         this.name = name;
         this.populationSize = populationSize;
         this.numGenerations = numGenerations;
+        this.mutationRate = mutationRate;
         population = new ArrayList<>();
         rand = new Random();
         MidiReader reader = new MidiReader(name + ".midi");
@@ -54,7 +55,7 @@ public class TabGA {
         return populationSize;
     }
 
-    public int getMutationRate(){
+    public double getMutationRate(){
         return mutationRate;
     }
 
@@ -66,30 +67,48 @@ public class TabGA {
         this.populationSize = populationSize;
     }
 
-    public void setMutationRate(int mutationRate) {
+    public void setMutationRate(float mutationRate) {
         this.mutationRate = mutationRate;
     }
 
+    /**
+     * Selects the pool of individuals to use as parents in the
+     * crossover method.
+     * @return An ArrayList of the selected Tab objects
+     */
     private ArrayList<Tab> selection(){
-        for(Tab tab : population){
-            tab.calculateFitness();
-        }
+//        for(Tab tab : population){
+//            tab.calculateFitness();
+//        }
         Collections.sort(population);
         return new ArrayList<>(population.subList(0, populationSize/2));
     }
 
     /**
-     * Randomly selects parent tabs from the population (weighted by fitness) and combines
-     * them into children by randomly selecting a break point and combining the chords
-     * from the first parent before the break and chords from the second parent after the
-     * break, then vice versa for the second child.
+     * Creates a new chord from the given chord, possibly with different fingering
+     * @param chord The chord to be mutated
+     * @return A new Chord containing the notes of the given chord
      */
-    private void crossover(){
+    private void mutate(Chord chord) throws Exception{
+        ArrayList<GuitarNote> notes = chord.getNotes();
+        chord.clearNotes();
+        for(GuitarNote note : notes){
+            chord.addNote(note);
+        }
+    }
+
+    /**
+     * Combines parent tabs into children by randomly selecting a break point and
+     * combining the chords from the first parent before the break and chords from
+     * the second parent after the break, then vice versa for the second child.
+     */
+    private void crossover() throws Exception{
         ArrayList<Tab> children = new ArrayList<>();
         ArrayList<Tab> parents = selection();
         int numChords = population.get(0).getChords().size();
         int parentsSize;
         int randomParent;
+        double mutationRand;
         while ((parentsSize = parents.size()) > 1){
             randomParent = rand.nextInt(parentsSize);
             ArrayList<Chord> parentOne = population.get(randomParent).getChords();
@@ -104,6 +123,18 @@ public class TabGA {
             ArrayList<Chord> childTwo = new ArrayList<>(parentTwo.subList(0, breakPoint));
             childOne.addAll(parentTwo.subList(breakPoint, numChords));
             childTwo.addAll(parentOne.subList(breakPoint, numChords));
+            for(Chord chord : childOne){
+                mutationRand = rand.nextDouble(100);
+                if(mutationRand < mutationRate){
+                    mutate(chord);
+                }
+            }
+            for(Chord chord : childTwo){
+                mutationRand = rand.nextDouble(100);
+                if(mutationRand < mutationRate){
+                    mutate(chord);
+                }
+            }
             children.add(new Tab(childOne));
             children.add(new Tab(childTwo));
         }
@@ -114,9 +145,13 @@ public class TabGA {
      * Converges on the most fit tab found by running the crossover
      * function for the assigned number of generations.
      */
-    public Tab mostFitTab(){
+    public Tab mostFitTab() throws Exception{
         for (int gen=0; gen<numGenerations; gen++){
+            //System.out.println("Generation: " + (gen+1));
             crossover();
+        }
+        for(Tab tab : population){
+            tab.calculateFitness();
         }
         Collections.sort(population);
         return population.get(0);

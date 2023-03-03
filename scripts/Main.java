@@ -9,14 +9,15 @@ public class Main {
     public static void main(String[] args){
 
         try {
-//            TabGA ga = new TabGA("rogero", 1000, 100);
-//            Tab tab = ga.mostFitTab();
+            TabGA ga = new TabGA("rogero", 1000, 100, 0.05);
+            Tab tab = ga.mostFitTab();
+            System.out.println(tab.getFitness());
 //            for(Chord chord : tab.getChords()){
 //                for(GuitarNote note: chord.getNotes()){
 //                    System.out.println(note.getFretNumber() + " " + note.getStringNumber());
 //                }
 //            }
-//            TabInterface.createTabFile("Rogero_Truncated", tab);
+            TabInterface.createTabFile("Rogero_Test", tab);
 //            TabInterface.sendToTAB("Rogero_Truncated");
 //            System.out.println(TabInterface.compareTabs("Rogero_Test", "rogero_original_guitar"));
 //            System.out.println(TabInterface.compareTabs("Rogero_Truncated", "rogero_original_guitar"));

@@ -1,0 +1,6 @@
+pop: 1000, gens: 100
+average score over 100 times
+
+Fitness based on distance between subsequent notes
+
+Truncation Selection: 

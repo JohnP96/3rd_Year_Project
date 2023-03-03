@@ -24,10 +24,12 @@ public class Chord{
         this.rand = rand;
     }
 
-    public Chord(GuitarNote note, Random rand){
+    public Chord(GuitarNote note, Random rand) throws Exception{
         this.rand = rand;
         notes = new ArrayList<>();
-        note.randomPosition();
+        if(!note.randomPosition()){
+            throw new Exception("No possible positions for note: " + note);
+        }
         notes.add(note);
     }
 
@@ -198,5 +200,12 @@ public class Chord{
                     .append(" String: ").append(n.getStringNumber()).append('\n');
         }
         return str.toString();
+    }
+
+    /**
+     * Removes all notes from the chord, this is used for mutation in the GA.
+     */
+    public void clearNotes(){
+        notes.clear();
     }
 }
