@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 13/02/2023
+ * Last edited: 03/03/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
@@ -81,15 +81,16 @@ public class  TabInterface {
 
     /**
      * Compares a generated .tab file with the original .tab file. Returning the
-     * number of different chords between them.
+     * proportion of different chords between them.
      * @param generatedTabName A string denoting the name of the generated .tab file
      * @param originalTabName A string denoting the name of the original .tab file
-     * @return An integer denoting the number of differences between the tabs.
+     * @return An integer denoting the proportion of differences between the tabs.
+     * i.e, the number of different chords divided by the total number of chords
      * Returns max integer value if they are different lengths.
      */
     public static int compareTabs(String generatedTabName, String originalTabName) throws FileNotFoundException {
         int differences = 0;
-
+        int numChords = 0;
         File generatedTab = new File("tab_files/" + generatedTabName + ".tab");
         File originalTab = new File("tab_files/" + originalTabName + ".tab");
         Scanner genScan = new Scanner(generatedTab );
@@ -108,6 +109,7 @@ public class  TabInterface {
         }
 
         while(genScan.hasNext() && origScan.hasNext()){
+            numChords++;
             genLine = genScan.next();
             origLine = origScan.next();
             if(!origLine.equals(genLine.trim())){
@@ -116,10 +118,10 @@ public class  TabInterface {
         }
         // If the tabs are different lengths
         if(genScan.hasNext() || origScan.hasNext()){
-            differences = Integer.MAX_VALUE;
+            return Integer.MAX_VALUE;
         }
-
-        return differences;
+        System.out.println(differences);
+        return differences/numChords;
     }
 
     /**

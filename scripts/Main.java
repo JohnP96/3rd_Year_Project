@@ -9,15 +9,27 @@ public class Main {
     public static void main(String[] args){
 
         try {
-            TabGA ga = new TabGA("rogero", 1000, 100, 0.05);
-            Tab tab = ga.mostFitTab();
-            System.out.println(tab.getFitness());
+//            ArrayList<Integer> results = new ArrayList<>();
+//            for(int i=0; i<100; i++) {
+                TabGA ga = new TabGA("rogero", 1000, 100, 0);
+                Tab tab = ga.mostFitTab();
+                TabInterface.createTabFile("Rogero_fitness1_Trunc_XX", tab);
+            System.out.println(TabInterface.compareTabs("Rogero_fitness1_Trunc_XX", "rogero_original_guitar"));
+//                results.add(TabInterface.compareTabs("Rogero_fitness1_Trunc_0", "rogero_original_guitar"));
+//            }
+//            System.out.println(results);
+//            double avg = 0;
+//            for(Integer i : results){
+//                avg += i;
+//            }
+//            avg = avg/results.size();
+//            System.out.println(avg);
+//            System.out.println(tab.getFitness());
 //            for(Chord chord : tab.getChords()){
 //                for(GuitarNote note: chord.getNotes()){
 //                    System.out.println(note.getFretNumber() + " " + note.getStringNumber());
 //                }
 //            }
-            TabInterface.createTabFile("Rogero_Test", tab);
 //            TabInterface.sendToTAB("Rogero_Truncated");
 //            System.out.println(TabInterface.compareTabs("Rogero_Test", "rogero_original_guitar"));
 //            System.out.println(TabInterface.compareTabs("Rogero_Truncated", "rogero_original_guitar"));

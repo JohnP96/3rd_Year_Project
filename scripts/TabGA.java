@@ -8,8 +8,7 @@
  * Description: Implementation of a genetic algorithm to transcribe guitar tablature
  * from a MIDI file input.
 
- * Bug fixes/improvements: Error handling needs to be improved. Add random break
- * point and parent selection for crossover. Add mutation.
+ * Bug fixes/improvements: Error handling needs to be improved.
  ************************************************************************************/
 import java.util.ArrayList;
 import java.util.Collections;
@@ -77,9 +76,9 @@ public class TabGA {
      * @return An ArrayList of the selected Tab objects
      */
     private ArrayList<Tab> selection(){
-//        for(Tab tab : population){
-//            tab.calculateFitness();
-//        }
+        for(Tab tab : population){
+            tab.calculateFitness();
+        }
         Collections.sort(population);
         return new ArrayList<>(population.subList(0, populationSize/2));
     }
@@ -87,7 +86,6 @@ public class TabGA {
     /**
      * Creates a new chord from the given chord, possibly with different fingering
      * @param chord The chord to be mutated
-     * @return A new Chord containing the notes of the given chord
      */
     private void mutate(Chord chord) throws Exception{
         ArrayList<GuitarNote> notes = chord.getNotes();

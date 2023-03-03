@@ -10,7 +10,7 @@
  * continuing in this way up the fretboard to fret 24 (149).
 
  * Bug fixes/improvements: Fix the way octaves work, add exception for no possible
- * positions
+ * positions.
  ************************************************************************************/
 import java.util.Random;
 import java.util.ArrayList;
