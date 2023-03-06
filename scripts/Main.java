@@ -9,31 +9,32 @@ public class Main {
     public static void main(String[] args){
 
         try {
-//            ArrayList<Integer> results = new ArrayList<>();
-//            for(int i=0; i<100; i++) {
-                TabGA ga = new TabGA("rogero", 1000, 100, 0);
-                Tab tab = ga.mostFitTab();
-                TabInterface.createTabFile("Rogero_fitness1_Trunc_XX", tab);
-            System.out.println(TabInterface.compareTabs("Rogero_fitness1_Trunc_XX", "rogero_original_guitar"));
-//                results.add(TabInterface.compareTabs("Rogero_fitness1_Trunc_0", "rogero_original_guitar"));
-//            }
-//            System.out.println(results);
-//            double avg = 0;
-//            for(Integer i : results){
-//                avg += i;
-//            }
-//            avg = avg/results.size();
-//            System.out.println(avg);
-//            System.out.println(tab.getFitness());
-//            for(Chord chord : tab.getChords()){
-//                for(GuitarNote note: chord.getNotes()){
-//                    System.out.println(note.getFretNumber() + " " + note.getStringNumber());
-//                }
-//            }
-//            TabInterface.sendToTAB("Rogero_Truncated");
-//            System.out.println(TabInterface.compareTabs("Rogero_Test", "rogero_original_guitar"));
-//            System.out.println(TabInterface.compareTabs("Rogero_Truncated", "rogero_original_guitar"));
 //            Random rand = new Random();
+            long startTime = System.currentTimeMillis();
+            ArrayList<Float> results = new ArrayList<>();
+
+            for(int i=0; i<100; i++) {
+                TabGA ga = new TabGA("rogero", 500, 100, 0.0);
+                Tab tab = ga.mostFitTab();
+                TabInterface.createTabFile("Rogero_fitness1_Trunc_0.05", tab);
+                results.add(TabInterface.compareTabs("Rogero_fitness1_Trunc_0.05", "rogero_to_guitar"));
+            }
+            long endTime = System.currentTimeMillis();
+            System.out.println(results);
+            double avg = 0;
+            for(Float i : results){
+                avg += i;
+            }
+            avg = avg/results.size();
+            System.out.println(avg);
+            System.out.println(endTime-startTime);
+
+//            TabInterface.sendToTAB("Rogero_Truncated");
+//            System.out.println(TabInterface.compareTabs("Rogero_Test", "rogero_to_guitar"));
+//            System.out.println(TabInterface.compareTabs("Rogero_Truncated", "rogero_to_guitar"));
+
+//            TabInterface.luteToGuitar("rogero", "rogero_to_guitar");
+
 //            Integer[][] notes = new Integer[12][];
 //            notes[0] = GuitarNote.cPositions;
 //            notes[1] = GuitarNote.cSharpPositions;
@@ -67,22 +68,7 @@ public class Main {
 //                System.out.println(m);
 //                System.out.println("String " + m%6 + " Fret " + (int)(m/6));
 //            }
-//
-//            File generatedTab = new File("tab_files/" + "Rogero_Test" + ".tab");
-//            File originalTab = new File("tab_files/" + "rogero_original_guitar" + ".tab");
-//            Scanner genScan = new Scanner(generatedTab );
-//            Scanner origScan = new Scanner(originalTab);
-//            genScan.useDelimiter("\n");
-//            origScan.useDelimiter("\n");
-//            while(genScan.hasNext() && origScan.hasNext()){
-//                String genLine = genScan.next();
-//                String origLine = origScan.next();
-//                System.out.println(genLine);
-//                System.out.println(origLine);
-//                System.out.println(genLine.equals(origLine));
-//                System.out.println(genLine.equals(origLine.trim()));
-//                System.out.println(origLine.equals(genLine.trim()));
-//            }
+
         }
         catch (Exception e){
             e.printStackTrace();

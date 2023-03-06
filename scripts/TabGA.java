@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 03/03/2023
+ * Last edited: 06/03/2023
 
  * Description: Implementation of a genetic algorithm to transcribe guitar tablature
  * from a MIDI file input.
@@ -52,6 +52,10 @@ public class TabGA {
 
     public int getPopulationSize(){
         return populationSize;
+    }
+
+    public ArrayList<Tab> getPopulation(){
+        return new ArrayList<>(population);
     }
 
     public double getMutationRate(){

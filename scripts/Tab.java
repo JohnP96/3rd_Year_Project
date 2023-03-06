@@ -78,7 +78,7 @@ public class Tab implements Comparable<Tab>{
         GuitarNote lastNote = lastChord.getNotes().get(lastChord.getNotes().size()-1);
         for (Chord chord : chords){
             for (GuitarNote note : chord.getNotes()){
-                fitness -= Math.ceil(note.getFretNumber() / 2.0);
+                fitness -= note.getFretNumber();
                 fitness -= (note.getCurrentPosition() - lastNote.getCurrentPosition()) * 2;
                 lastNote = note;
             }

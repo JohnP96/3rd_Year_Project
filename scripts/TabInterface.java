@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 03/03/2023
+ * Last edited: 06/03/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
@@ -88,9 +88,9 @@ public class  TabInterface {
      * i.e, the number of different chords divided by the total number of chords
      * Returns max integer value if they are different lengths.
      */
-    public static int compareTabs(String generatedTabName, String originalTabName) throws FileNotFoundException {
-        int differences = 0;
-        int numChords = 0;
+    public static float compareTabs(String generatedTabName, String originalTabName) throws FileNotFoundException {
+        float differences = 0;
+        float numChords = 0;
         File generatedTab = new File("tab_files/" + generatedTabName + ".tab");
         File originalTab = new File("tab_files/" + originalTabName + ".tab");
         Scanner genScan = new Scanner(generatedTab );
@@ -112,7 +112,7 @@ public class  TabInterface {
             numChords++;
             genLine = genScan.next();
             origLine = origScan.next();
-            if(!origLine.equals(genLine.trim())){
+            if(!origLine.equals(genLine)){
                 differences++;
             }
         }
@@ -120,7 +120,6 @@ public class  TabInterface {
         if(genScan.hasNext() || origScan.hasNext()){
             return Integer.MAX_VALUE;
         }
-        System.out.println(differences);
         return differences/numChords;
     }
 
@@ -132,8 +131,8 @@ public class  TabInterface {
      * @throws FileNotFoundException If the lute tab cannot be found
      * @throws IOException If there is an error writing the guitar tab
      */
-    public static void luteToGuitar(String tabName) throws FileNotFoundException, IOException{
-        try(FileWriter writer = new FileWriter("tab_files/" + tabName + "_original_guitar.tab")) {
+    public static void luteToGuitar(String tabName, String fileName) throws FileNotFoundException, IOException{
+        try(FileWriter writer = new FileWriter("tab_files/" + fileName + ".tab")) {
             writer.append("$line=o\n").append("{").append(tabName).append("}\n").append("b\n");
             File luteTab = new File("tab_files/" + tabName + ".tab");
             Scanner luteFileScanner = new Scanner(luteTab);
