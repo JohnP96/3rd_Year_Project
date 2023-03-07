@@ -19,7 +19,7 @@ public class  TabInterface {
      * @return A boolean for whether the function was successful or not
      */
     public static boolean createTabFile(String name, Tab tab) throws IOException{
-        try(FileWriter writer = new FileWriter("tab_files/" + name + ".tab")) {
+        try(FileWriter writer = new FileWriter("generated_tab/" + name + ".tab")) {
             writer.append("$line=o\n").append("{").append(name).append("}\n").append("b\n");
             int counter = 0;
             for(Chord chord : tab.getChords()){
@@ -60,7 +60,7 @@ public class  TabInterface {
     public static boolean sendToTAB(String name) throws IOException, InterruptedException{
 
         String output = "../output_tab/" + name;
-        String input = "../tab_files/" + name + ".tab";
+        String input = "../generated_tab/" + name + ".tab";
 
         // Run TAB executable in console
         Runtime rt = Runtime.getRuntime();
@@ -91,8 +91,8 @@ public class  TabInterface {
     public static float compareTabs(String generatedTabName, String originalTabName) throws FileNotFoundException {
         float differences = 0;
         float numChords = 0;
-        File generatedTab = new File("tab_files/" + generatedTabName + ".tab");
-        File originalTab = new File("tab_files/" + originalTabName + ".tab");
+        File generatedTab = new File("generated_tab/" + generatedTabName + ".tab");
+        File originalTab = new File("original_tab/" + originalTabName + ".tab");
         Scanner genScan = new Scanner(generatedTab );
         Scanner origScan = new Scanner(originalTab);
         genScan.useDelimiter("\n");
@@ -132,9 +132,9 @@ public class  TabInterface {
      * @throws IOException If there is an error writing the guitar tab
      */
     public static void luteToGuitar(String tabName, String fileName) throws FileNotFoundException, IOException{
-        try(FileWriter writer = new FileWriter("tab_files/" + fileName + ".tab")) {
+        try(FileWriter writer = new FileWriter("original_tab/" + fileName + ".tab")) {
             writer.append("$line=o\n").append("{").append(tabName).append("}\n").append("b\n");
-            File luteTab = new File("tab_files/" + tabName + ".tab");
+            File luteTab = new File("original_tab_lute/" + tabName + ".tab");
             Scanner luteFileScanner = new Scanner(luteTab);
             luteFileScanner.useDelimiter("\n");
             String line = "";
