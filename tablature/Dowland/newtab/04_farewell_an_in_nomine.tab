@@ -2,42 +2,32 @@
 -t
 -f
 {4. Farewell/4. Farewell}
-b
 c
 1 a
 1   c
 1 ab
 #2  a
-
-
 x   c
-b
 1 df
 #2    c
 x  d
 1 daa
 #2    e
 x    c
-b
 #2 abc
-
 
 x  d
 1  f
 #2   b
 x  a
 1  d
-b
 2. a c
 3  d
 #2  b
 x  a
-
-
 1 abc
 #2     a
 x  a
-b
 1 a ccd
 #2     c
 x     a
@@ -46,9 +36,6 @@ x     a
 x    c
 
 
-b
-
-b
 1  ee c
 #2 a c
 x   a
@@ -56,48 +43,36 @@ x   a
 x    c
 x  e e
 x c
-
-
-b
 1 db c
 #2  a
 x    a
 #2 d c d
 x   a
 1   a c
-b
 #2a   ea
 x    c
-
 
 1    c d
 2.a   c c
 3    c
 1    b
-b
 2 d  c a
 1  f
 2  d
 1 db c
 #2  a
-
-
 x    a
-b
 #2a  c d
 x   a
 1   a c
 2.a   fa
 3    f
 1    e
-b
 1c     d
-
 
 1  a
 1ca
 1  d  c
-b
 1cd  c
 #2    a
 x c
@@ -105,10 +80,6 @@ x c
 #2  d
 x    e
 
-
-b
-
-b
 #2cdf c
 x    e
 x  aa
@@ -117,30 +88,22 @@ x  cc
 x  a
 x dfa
 
-
 x    c
-b
 2.ccfe
 3  f
 1  e
 1cdf
 #2    c
 xc
-b
 1fc  a
-
-
 1 d   c
 #2f   a
 x f
 1 c
-b
 1c     d
 1  d
 1ca
 1  a
-b
-
 
 #2c
 x  c
@@ -149,61 +112,46 @@ x  a
 1cdf
 #2   e
 x c
-b
 1aac
 1 bd
-
-
 #2a
 x   c
 x  c
 x a
-b
 1 dde
 1  ff
 #2 d
 x   a
 x  de
 
-
 x d
-b
 
-b
 2a cc
 #3  a
 x  c
 #2  d
 x   e
 #2aac
-
-
 x   c
 x c
 x  d
-b
 #2aac
 x   c
 x c
 x  d
 #2aac
 x   c
-
 
 2 cd
 #3 a
 x c
-b
 1cd a
 #2    c
 x    e
 #2c aa
 x  cc
 x  ee
-
-
 x ac
-b
 2cce
 #3  c
 x  e
@@ -213,78 +161,58 @@ x d
 x  f
 1  e
 
-
-b
 1cdf
 1  d  c
 1cc  a
 1 d  c
-b
 1fc   c
 1 h a
 #2f  e
 x c
-
-
 x d c
 x   a
-b
 
-b
 #2h  f
 x  i
 x  h
 x  f
 1h if
 
-
 1 f
-b
 1fha
 #2 f
 x d
 1fca
 #2 a
 x c
-b
 1cdf
-
-
 #2 c
 x  d
 #2cca
 x  b
 x  d
 x df
-b
 #2df f
 x d
 1 d e
 
-
 2.d  c
 3 d
 1 c
-b
 2cd a
 2. da c
 3  c
 2 cee
 #3c  a
 x a
-
-
 #2 a  c
 x c e
 #3  e
 x   c
-b
 
-b
 2caaa
 #3    e
 xa
-
 
 2 d  c
 #3 c
@@ -293,11 +221,8 @@ x     c
 x d  c
 x  d  c
 x c  a
-b
 2c a   d
 #3 a
-
-
 x     a
 2  d  c
 #3 d
@@ -307,8 +232,6 @@ x a a  d
 #3    ec
 x  f
 2  e
-b
-
 
 2ca
 #3      a
@@ -320,11 +243,8 @@ x      c
 #3  c
 x     a
 2  d  c
-
-
 #3 a
 x     e
-b
 #2ac
 x    a
 x a
@@ -333,78 +253,60 @@ x     e
 x a   e
 #3    a
 
-
 x d
 2 c
-b
 
-b
 2cdd   d
 2.   a
 3   c
 2  a
 #3c
-
-
 x  b
 #2  d
 x   a
 x      d
-b
 #2acd
 x    a
 #3 a
 x    c
 2  d e
 
-
 #3a
 x   a
 #2  cc
 x  d e
 x    a
-b
 #2 d
 x  de
 x  ff
 x  de
-
-
 #2 d
 x  ff
 x  de
 x  ff
-b
 #2a
 x ac
 x cd
 x ac
 #2a
 
-
 x cd
 x ac
 x cd
-b
 2c
 #3   a
 x    e
 2    c
 #3 d  b
 x c
-
-
 #2ca  c
 x  e  c
 #3 a
 x     e
 2 c  a
-b
 
-b
 #2 da c
 x  b
-
 
 x  d  c
 #2  f  d
@@ -416,9 +318,6 @@ x    a
 #2   c d
 x   e
 x   a c
-
-
-b
 #2a   ef
 x   c
 x     a
@@ -429,19 +328,15 @@ x    c
 x     a
 x da  c
 
-
 #2   c d
 x a
 x c  a
-b
 #2c     d
 x  a
 x  d  c
 2 d
 #3    c
 x c
-
-
 2 a
 2c
 #3    b
@@ -450,9 +345,7 @@ xa
 #2 c
 x    b
 x ea c
-b
 #2   c a
-
 
 xa
 x     a
@@ -464,12 +357,8 @@ x b
 x    a
 #2     a
 x a
-
-
 x c  a
-b
 
-b
 1 da   d
 2      d
 #2  d
@@ -477,19 +366,15 @@ x     c
 x  d
 1 df  d
 
-
 2  d  c
 #2  a
 x      d
 x   a
-b
 #2 daa
 x  bc
 x  de
 #2  ff
 x   a
-
-
 x  de
 #2 dff
 x   a
@@ -497,10 +382,8 @@ x  de
 #2  ff
 x   a
 x  de
-b
 2 db c
 #3  a
-
 
 x    a
 2   b c
@@ -512,12 +395,9 @@ x   a
 x     c
 #3      d
 x   c
-
-
 #3  a
 x  b
 2  d
-b
 1 db  d
 2     d
 #2    c
@@ -525,19 +405,14 @@ x  a
 x   a
 2 d f
 
-
 #3     d
 x  d
 2  f
 #2    f
 x  d
 x   e
-b
 
-b
 1a d d
-
-
 2    d
 #2  b
 x    d
@@ -549,8 +424,6 @@ x a a
 x  b
 x  d
 
-
-b
 2 df  d
 #3  d
 x  b
@@ -560,8 +433,6 @@ x  b
 x   c
 2   a
 2 d
-
-
 #3    c
 x   c
 2  a
@@ -569,10 +440,8 @@ x   c
 3   c
 #3  a
 x  b
-b
 #2 c
 x     c
-
 
 x  d
 #2  c
@@ -584,12 +453,8 @@ x  c
 2  a
 #2  c
 x    e
-
-
 x   d
-b
 
-b
 #2 a
 x   b
 x    c
@@ -597,19 +462,15 @@ x    c
 x     a
 x   c
 
-
 #2 aab
 xc
 xf  c
 #2 d  c
 xc  a
 x a   d
-b
 #2c da
 xa
 x    e
-
-
 2f
 #3    a
 xd
@@ -621,10 +482,8 @@ xa   e
 #3   a
 xd
 
-
 xc
 xa
-b
 #2da c
 xc  b
 xa bc
@@ -632,8 +491,6 @@ xa bc
 #3    c
 xa
 2c
-
-
 2da   a
 #3f
 xd
@@ -642,11 +499,8 @@ xa
 #2h
 x      e
 xc
-b
 
 
-
-b
 2ha   a
 #3f
 xd
@@ -656,8 +510,6 @@ x d
 x b
 #3 a
 x  d
-
-
 x  b
 x  a
 #3 ab
@@ -669,19 +521,15 @@ x  d
 x a
 x c
 
-
 #3 d
 xa
 xc
 xd
-b
 2.caa   a
 3 e
 2 a
 #2h
 xc
-
-
 xd    a
 #2ca    e
 xh
@@ -691,11 +539,7 @@ xf a
 xd
 xc
 xa
-b
-
 
 Ycaabcca
-b
-b
 
 e

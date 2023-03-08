@@ -29,36 +29,9 @@ public class Main {
 //            System.out.println(avg);
 //            System.out.println(endTime-startTime);
 
-
-            File dir = new File("tablature/Dowland/newtab");
-            File tabDir = new File("TAB");
-            String line;
-            for(File file : Objects.requireNonNull(dir.listFiles())){
-                String nameTab = file.getName();
-                String midiPath = "F:\\Documents\\GitHub\\3rd_Year_Project\\midi_files\\"
-                        + nameTab.substring(0, nameTab.indexOf('.')) + ".midi";
-                String tabPath = "F:\\Documents\\GitHub\\3rd_Year_Project\\tablature\\Dowland\\newtab\\" + nameTab;
-                // Run TAB executable in console
-//                Runtime rt = Runtime.getRuntime();
-                ProcessBuilder p = new ProcessBuilder("F:\\Documents\\GitHub\\3rd_Year_Project\\TAB\\tab.exe", "-midi", tabPath);
-                p.directory(tabDir);
-                // Print console output from TAB software (in case of errors)
-
-                p.inheritIO();
-                Process proc = p.start();
-                PrintWriter out = null;
-                String lineFromInput;
-                BufferedReader inputStream = new BufferedReader(new InputStreamReader(System.in));
-                while((lineFromInput =inputStream.readLine()) != null){
-                //create a print writer for writing to a file
-                out = new PrintWriter(new FileWriter(midiPath));
-                out.println(lineFromInput);
-                }
-                out.close();
-            }
-
 //            File dir = new File("tablature/Dowland/tab");
 //            String line;
+//            String lastLine = "a";
 //            for(File file : Objects.requireNonNull(dir.listFiles())){
 //                String nameTab = file.getName();
 //                String name = nameTab.substring(0, nameTab.indexOf('.'));
@@ -68,16 +41,21 @@ public class Main {
 //                int counter = 0;
 //                while((line = reader.readLine()) != null){
 //                    counter++;
-//                    writer.write(line + "\n");
-//                    if(counter % 10 == 0){
-//                        writer.write("\n\n");
+//                    if(!line.equals("P") && !line.equals("b")) {
+//                        writer.write(line + "\n");
 //                    }
+//                    if(counter % 20 == 0){
+//                        if(!lastLine.equals("")) {
+//                            writer.write("\n");
+//                        }
+//                    }
+//                    lastLine = line;
 //                }
 //                reader.close();
 //                writer.close();
 //                fis.close();
 //            }
-//            File file = Objects.requireNonNull(dir.listFiles())[0];
+//            File file = Objects.requireNonNull(dir.listFiles())[1];
 //            String nameTab = file.getName();
 //            String name = nameTab.substring(0, nameTab.indexOf('.'));
 //            FileInputStream fis = new FileInputStream(file);
@@ -87,7 +65,7 @@ public class Main {
 //            while((line = reader.readLine()) != null){
 //                counter++;
 //                writer.write(line + "\n");
-//                if(counter % 10 == 0){
+//                if(counter % 20 == 0){
 //                    writer.write("\n\n");
 //                }
 //            }

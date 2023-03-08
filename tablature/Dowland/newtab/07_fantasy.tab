@@ -2,14 +2,11 @@
 -t
 -f
 {7. A fancy/7. A fancy}
-b
 c
 #2 a
 x    c
 x    e
 x   b
-
-
 2 a c
 #3   a
 x    d
@@ -17,10 +14,8 @@ x    d
 x    a
 x     d
 x     c
-b
 #2 a   a
 x     d
-
 
 x      d
 x     a
@@ -28,12 +23,9 @@ x     a
 x a   d
 x cd  c
 x ea
-b
 2aab  a
 #3 d
 x b
-
-
 #3 a
 x  d
 x  b
@@ -42,11 +34,8 @@ x  a
 x  de
 x ab
 x cd
-b
 
 
-
-b
 2 dfec
 #3  d
 x  b
@@ -56,19 +45,15 @@ x   a
 x    e
 #3 d  c
 x    e
-
-
 x   a
 x    e
 #3    c
 x    a
 x     d
 x     c
-b
 #2d    a
 x   c
 #3  b
-
 
 x  d
 x a
@@ -80,10 +65,7 @@ x  a
 #3  b
 x  d
 x a
-
-
 x c
-b
 #3cd
 xd
 xf
@@ -93,7 +75,6 @@ xf
 xd
 x a
 
-
 #3  d
 xd
 xc
@@ -102,11 +83,7 @@ x  d
 xc
 xa
 x  b
-b
 
-
-
-b
 #3  a
 x f
 x e
@@ -117,7 +94,6 @@ x  a
 x e
 #3aa c
 
-
 x  a
 x  b
 x  d
@@ -125,11 +101,8 @@ x  d
 x b
 x a
 x  d
-b
 #3a b
 x  a
-
-
 x   c
 x  a
 #3  b
@@ -141,8 +114,6 @@ x c
 2.c
 3 ce
 
-
-b
 #2cdf
 x a
 x c e
@@ -151,9 +122,6 @@ x  e
 3c
 2.c
 3 ce
-b
-
-
 #2cdf
 xh
 x  aa
@@ -163,11 +131,8 @@ xd  c
 2c  b
 #3a
 xc
-b
 
 
-
-b
 2.da c
 3a
 #2c  b
@@ -176,11 +141,8 @@ xf
 xf
 2df
 #3c   c
-
-
 x f
 2 e
-b
 #3d  c
 x  a
 x  b
@@ -188,7 +150,6 @@ x  d
 #3 a
 x c
 2cd  c
-
 
 #3d  c
 x  a
@@ -198,10 +159,7 @@ x  d
 x c
 x d  c
 xa
-b
 #3c  a
-
-
 xd
 xf   a
 xd
@@ -213,19 +171,14 @@ x c
 xa
 xc   a
 
-
 xa
 #3 d a
 x b
 x a
 x  d
-b
 
-b
 #3 a   d
 x  d
-
-
 x  b d
 x  a
 #3  b c
@@ -237,19 +190,15 @@ x  d
 x  b
 x  a
 
-
 #3  b  a
 x  d
 x a
 x c
-b
 #3 d  c
 xa
 xc
 xd
 #3c   a
-
-
 xa
 xc    d
 xa
@@ -261,9 +210,7 @@ x c
 xa
 x  a
 
-
 x e
-b
 #3     a
 xaac
 x   c
@@ -272,11 +219,8 @@ x d
 x a
 2 b
 #2aac  a
-
-
 x   c
 1aac
-b
 #2 ab  d
 x d
 xa
@@ -285,30 +229,23 @@ xc  a
 #3  a
 xc
 
-
 2a b
 #3 da
 x b
-b
 
-b
 #2 ab  d
 xa   d
 x d  c
 x a   d
-
-
 2a   d
 #3 d  c
 x b
 #2 a   d
 xa    a
-b
 2 da
 #3    c
 xa
 #2c
-
 
 x c  b
 2c
@@ -318,10 +255,7 @@ xa
 x c
 x a
 x    a
-b
 #3d    d
-
-
 x     c
 x     a
 x     c
@@ -333,7 +267,6 @@ x    d
 x     d
 x    a
 
-
 x    c
 #3    d
 x    c
@@ -341,10 +274,6 @@ x    c
 x    c
 x    a
 x    c
-b
-
-b
-
 
 #3f   d
 x    c
@@ -357,7 +286,6 @@ x     a
 #3f    c
 x      d
 
-
 x     a
 x     c
 #3     d
@@ -366,10 +294,7 @@ x     c
 x     c
 x     a
 x     c
-b
 #2h    d
-
-
 x   f
 xh
 x    f
@@ -378,9 +303,7 @@ x    f
 x    h
 #2    f
 x     h
-b
 2.h   h
-
 
 3   e
 #2   f
@@ -389,11 +312,8 @@ x    h
 x f f
 x e e
 x c c
-b
 #2fe e
 x f c
-
-
 x   e
 x e
 2da c
@@ -402,11 +322,8 @@ x d
 2ab  d
 #3  bc
 x a
-b
 
 
-
-b
 2abd a
 #3  cc
 x a
@@ -416,12 +333,9 @@ x  d
 2 aa c
 #3d
 x    e
-
-
 2c  b
 #3  bc
 xa
-b
 2 ea c
 #3d
 x    e
@@ -429,19 +343,15 @@ x    e
 #3  bc
 xa
 
-
 2 ea c
 #3   a
 xc
 2a   e
 #3   a
 x d
-b
 2 cd a
 #3 d
 x    c
-
-
 2a   d
 #3   a
 xb
@@ -450,9 +360,7 @@ xf
 #3    a
 xd
 2c  a
-b
 #3dab  d
-
 
 xd
 x d  c
@@ -464,19 +372,14 @@ x d
 #3 ab  d
 x a
 xa   d
-
-
 xa
 #3 d  c
 x d
 x a   d
 x a
-b
 
-b
 #3f   a
 xf
-
 
 xa   e
 xa
@@ -488,19 +391,15 @@ xa
 x c
 xc  a
 xc
-
-
 #3a   e
 xa
 x c  a
 x c
-b
 #3 ea c
 x e
 xd  c
 xd
 #3ca b
-
 
 xc
 xaabc
@@ -510,45 +409,34 @@ x e
 2.h  f
 3f
 2da c
-b
 2.c  b
-
-
 3  d
 2.aabc
 3c
 1 ea c
 #2 a   e
 xa
-b
 1 bdca
 2 a c e
 2. bd a
-
 
 3 a
 2  d d
 #2 aa c
 xh
-b
 2.da c a
 3a
 #2 aa   e
 xc
 2     a
-
-
 2.da c
 3      d
 2f  c  b
-b
 
-b
 2 aa   a
 2.h
 3f
 #3d
-
 
 xc
 #3      a
@@ -559,9 +447,6 @@ xa
 x  d
 x  b
 x  a
-b
-
-
 #3  b   a
 xc
 xa
@@ -573,21 +458,16 @@ x   c
 #3      a
 x f e
 
-
 x e
 x c
 #3 e
 x f
 x  d
 x e
-b
 1aac  a
 1d
 1d
-
-
 1dab  d
-b
 1 da c
 #2aa c d
 xd
@@ -595,8 +475,6 @@ xd
 xca bc
 xa  c a
 xd
-b
-
 
 #2cdda
 xf
@@ -609,10 +487,6 @@ xd
 xc
 xa
 
-
-b
-
-b
 #2 da c
 xc
 x    b
@@ -621,31 +495,25 @@ x c
 xc
 #3     c
 
-
 xa
 x d
 x c
-b
 #2 ab  d
 x d
 x     c
 x  d
 #2 a   d
 x d
-
-
 #3      d
 x b
 x a
 x  d
-b
 #3 a   d
 x  d
 x  b
 x  a
 #3  b  a
 
-
 x  d
 x a
 x c
@@ -656,19 +524,14 @@ x  d
 #3 a   d
 x c
 x d
-
-
 xa
-b
 
-b
 #3c  a
 xa
 x d
 x c
 #3 d  c
 xa
-
 
 xc
 xd
@@ -680,9 +543,6 @@ x   a
 x  a
 x  b
 x  d
-
-
-b
 #3ca
 x  d
 x a
@@ -693,54 +553,42 @@ x  b
 x   c
 #2 ef
 
-
 x a
 x d f
 xh
-b
 #2 dde
 xf
 #3 abc
 xa
 2d
 #3 abc
-
-
 xd
 2c
 #3 abc
 xd
 2a
-b
 2. ea c
 3a   e
 #2c  b
 xd  c
 
-
 #2c  b
 xa  c
 x e  c
 x a
-b
 
-b
 2.cdda
 3d  c
 #2f  e
-
-
 xh  f
 #2fd e
 xd  c
 xc  b
 x a
-b
 2da c
 #3c
 xa
 2c  b
-
 
 #3a
 xc
@@ -752,9 +600,6 @@ x a
 x  b
 x  a
 x   c
-
-
-b
 #3 aa c
 x c
 x d
@@ -765,7 +610,6 @@ xc
 xa
 #3 d  c
 
-
 x c
 x a
 x  d
@@ -773,10 +617,6 @@ x  d
 x c
 x d
 x a
-b
-
-b
-
 
 #3 c   c
 x a
@@ -789,19 +629,15 @@ x c
 #3 a   d
 x  d
 
-
 x a
 x c
 #3 d
 x a
 x c
 x d
-b
 #3a    a
 x e
 xa
-
-
 xc
 #3d
 xc
@@ -813,19 +649,15 @@ xc
 xd
 #3c  a
 
-
 x d
 xa
 xc
-b
 #3a   d
 x d
 xa
 xc
 #3d   c
 xa
-
-
 xc
 xd
 #3f   a
@@ -838,9 +670,6 @@ xc
 xa
 
 
-b
-
-b
 #3c  a
 xd
 xc
@@ -848,8 +677,6 @@ xa
 #3 d
 x b
 x a
-
-
 x  d
 #3 a   d
 x d
@@ -859,8 +686,6 @@ xc
 x d
 xa
 xc
-b
-
 
 #3d    d
 x d
@@ -872,19 +697,15 @@ xa
 x d
 #3 c  a
 xa
-
-
 xc
 xd
 #3f
 xa
 xc
 xd
-b
 #3f   a
 xa
 xc
-
 
 xd
 #3f
@@ -896,19 +717,14 @@ x c
 x a
 x  d
 #3 a
-
-
 x c
 x d
 x a
-b
 
-b
 #3 c  a
 x a
 x c
 x d
-
 
 #3a   d
 xc
@@ -920,11 +736,8 @@ xc
 xd
 #3f
 xd
-
-
 xc
 x f
-b
 #3c   c
 x f
 x e
@@ -932,7 +745,6 @@ x c
 #3 e
 x f
 x c
-
 
 x e
 #3a    a
@@ -943,9 +755,6 @@ xc
 xc
 xd  c
 xa
-b
-
-
 #3c  a
 xa
 xc
@@ -957,19 +766,14 @@ xc
 #3a   d
 x d
 
-
 xa
 xb
 #3    a
 xa
 2 b
-b
 
-b
 #3    d
 xa
-
-
 xb
 x    a
 #3    d
@@ -981,30 +785,24 @@ xa
 xf
 x    a
 
-
 #3    d
 xa
 2c  a
-b
 2dab  d
 #3    c
 x d
 2a   d
 #3    c
 x d
-
-
 2 a   d
 #3    d
 xa
 2 d  c
 #3     d
 x a
-b
 2cd  c
 #3    b
 x c
-
 
 2 d  c
 #3     c
@@ -1015,9 +813,6 @@ x c
 2 d  c
 #3    c
 x a
-b
-
-
 #2db c
 x b c
 x a a
@@ -1029,19 +824,14 @@ x b c
 x a a
 #2  d d
 
-
 x a a
 x  b c
-b
 
-b
 #2f a a
 x  a a
 x  b c
 #2  d d
 x  d d
-
-
 x  b c
 #2f a a
 x  a a
@@ -1049,10 +839,8 @@ x  b c
 #2  a a
 x   c d
 x   b c
-b
 #2d b  a
 x  b  a
-
 
 x  b  a
 #2  b  a
@@ -1064,9 +852,6 @@ x a   d
 #2 a   d
 x a   d
 x c  a
-
-
-b
 #2cd  c
 x d  c
 x c  b
@@ -1077,33 +862,25 @@ x a
 x d  c
 x c  b
 
-
 #2 d  c
 x d  c
 x a
-b
 #2a    e
 x a
 x b  a
 #2a    e
 x a
 x b  a
-
-
 #2a    e
 x a
 x b  a
 #2 a   e
 x b  a
 x  d
-b
 c
 waac  a
-b
 
 
-
-b
 #3     a
 xda
 xc d
@@ -1112,8 +889,6 @@ xa b
 x b c
 x a a
 x  d d
-
-
 #3  b ca
 x  a a
 x  b c
@@ -1122,9 +897,7 @@ x  d d
 x  a a
 x  b c
 x  d d
-b
 #3     d
-
 
 x a a
 x b c
@@ -1136,19 +909,15 @@ x a a
 #3 b c d
 x a a
 x b c
-
-
 x a a
 #3 b c
 x a a
 x d d
 x b c
-b
 #3 d da
 x b c
 xb d
 xa b
-
 
 #3 d d
 x b c
@@ -1160,19 +929,14 @@ xb d
 xa b
 #3 d d
 x b c
-
-
 x a a
 x  d d
-b
 
-b
 #3 a   d
 xd
 xc
 xa
 #3 d
-
 
 x b
 x a
@@ -1184,10 +948,7 @@ x  a
 #3  b
 x  d
 x a
-
-
 x c
-b
 #3 d  c
 x a
 x a
@@ -1197,7 +958,6 @@ x d
 x d
 x a
 
-
 #3 a  c
 xc
 xc
@@ -1206,10 +966,7 @@ xa
 x c
 x a
 x  d
-b
 #3 a   d
-
-
 x  b
 x d  c
 x  b
@@ -1221,19 +978,14 @@ x  b
 x  b
 x a   d
 
-
 x  b
 #3 d  c
 x  b
 xa   d
 x  d
-b
 
-b
 #3 ea c
 xa
-
-
 xc
 xd
 #3c
@@ -1245,19 +997,15 @@ x c
 x e
 xa
 
-
 #3c
 x a
 x c
 x e
-b
 #3a    a
 xh
 xh
 xe
 #3e
-
-
 xa
 xh
 xe
@@ -1267,11 +1015,7 @@ xh
 xe
 2.a
 3a
-b
-
 
 Yaaccca
-b
-b
 
 e

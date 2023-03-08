@@ -2,17 +2,13 @@
 -t
 -f
 {18. A pavan/18. A pavan}
-b
 c
 1hf f a
 #2    h
 xf
 1da c a
-
-
 #2c
 x  d
-b
 #3 abc a
 xc
 xa
@@ -21,7 +17,6 @@ x e
 x  b
 x  a
 
-
 x   c
 #3    c
 x f e
@@ -29,11 +24,8 @@ x e
 x c
 #2 e
 x    a
-b
 #2 a c d
 xa
-
-
 xc db c
 xf
 2da   a
@@ -42,11 +34,8 @@ xc
 #3a
 x e
 2a
-b
 
 
-
-b
 1caa c
 #2 a
 x c
@@ -56,9 +45,6 @@ x a
 2  def
 #3 ab d
 x    c
-
-
-b
 2ab  a
 #3ca
 x  d
@@ -69,30 +55,24 @@ xa
 #3ac e
 x   c
 
-
 2cd a
 #3dc c
 x a
-b
 #2ccee
 x dff
 3. cfe
 4  f
 #3  e
 x c
-
-
 2 aa c
 #2c
 xd
 xf    c
-b
 2hd f d
 #3f   a
 xd
 2ca bc
 #3d  ca
-
 
 x     d
 #3fc e c
@@ -103,11 +83,7 @@ x f
 4a
 #3d
 xc
-b
 
-
-
-b
 2.aac  a
 #4 d
 x b
@@ -117,19 +93,14 @@ x  c
 x  a
 #2aac  a
 
-
 x   c
 1     a
-b
-b
 3hf f a
 #4f
 xh
 #4i
 xh
 xi
-
-
 xh
 #4i
 xh
@@ -141,19 +112,15 @@ x h
 #4c
 xd
 
-
 #4f
 xd
 xc
 xa
 #2c
 x  d
-b
 3 ab  a
 #4d
 xc
-
-
 #3a
 x e
 3a
@@ -165,19 +132,14 @@ x   c
 x f e
 x e
 
-
 x c
 #2 e
 x    a
-b
 
-b
 #2 a c d
 xa
 #4c    c
 x f
-
-
 xc
 xd
 #4f
@@ -189,7 +151,6 @@ xf
 #3a
 x e
 
-
 3a
 #4c
 xd
@@ -197,11 +158,8 @@ xd
 xd
 xc
 xa
-b
 1caa c
 #3 a
-
-
 x  d
 x a
 x c
@@ -213,9 +171,7 @@ x a
 x  de
 x ab d
 
-
 x    c
-b
 #3a   a
 x b
 xca
@@ -224,8 +180,6 @@ x  d
 xd
 xc  e
 xa
-
-
 #3   f
 x df
 xac e
@@ -234,11 +188,8 @@ x   c
 x d
 xdc c
 x a
-b
 
 
-
-b
 3ccee
 #4  c
 x  e
@@ -248,8 +199,6 @@ x d
 x  f
 #4 c e
 x  f
-
-
 x  e
 x  c
 #4  f
@@ -261,19 +210,15 @@ x  e
 2 aa c
 3c
 
-
 #4a
 xc
 #2d
 xf    c
-b
 2hd f d
 #3f   a
 xd
 #3ca b
 x    c
-
-
 xd  ca
 x     d
 #4f    c
@@ -285,7 +230,6 @@ xa
 xc
 xd
 
-
 #4c   c
 x f
 x e
@@ -297,10 +241,6 @@ x e
 x c
 x e
 
-
-b
-
-b
 3aa   a
 #4d
 xb
@@ -308,7 +248,6 @@ xb
 #4 d
 x b
 #4 a
-
 
 x b
 x d
@@ -320,12 +259,8 @@ x  a
 #3aac
 x   c
 x     a
-
-
 x  d
 1aac
-b
-b
 #2 aa c
 xc
 x d
@@ -333,54 +268,42 @@ x d
 xa
 2caa c
 
-
 #3d
 x   c
 #2c a
 xa b
-b
 #2 ea c
 xa b d
 #3   ec
 x f
 2 e
-
-
 2aab  a
 #3 dd  c
 x c
 #2 a   d
 x    c
-b
 #2  d ec
 x    a
 x a a d
 x    c
 
-
 #2 c  a
 x  d  c
 x da c
 x ab
-b
 2aabc
 #3     a
 xa
 #2 dd  c
 xc     d
-
-
 #2aa   d
 xd    a
 x aa c
 xc
-b
 
-b
 2dab
 #3   c
 xd
-
 
 #2fd e
 x   a
@@ -388,12 +311,9 @@ x   a
 x    h
 xghhe
 xh   g
-b
 2da c
 #3c
 xa
-
-
 2caa
 #3    c
 xc
@@ -401,10 +321,8 @@ xc
 xf   a
 xda cc
 xca b
-b
 #3a   d
 x d
-
 
 xa   a
 xc
@@ -416,11 +334,8 @@ xf
 xc
 #3a b d
 xd
-
-
 xc d
 xa
-b
 2 efec
 #3c
 x    c
@@ -429,19 +344,13 @@ x f
 x e
 x c
 
-
 #2 ef
 x   e
 1      a
-b
-b
 
-b
 #2 aa c
 xc
 x d
-
-
 #3  a
 xa
 3caa c
@@ -453,8 +362,6 @@ x   c
 #3 ab
 xa
 
-
-b
 #3 ea c
 x a
 #4a   d
@@ -464,8 +371,6 @@ xa
 #4c   c
 x f
 x e
-
-
 x c
 #4 f
 x e
@@ -477,19 +382,15 @@ x e
 xa
 x dd  c
 
-
 x c
 #2 a   d
 x    c
-b
 #3  d  c
 x    e
 x    c
 x    a
 #3 a   d
 x   a
-
-
 x    e
 x    c
 #3    a
@@ -502,9 +403,6 @@ x cb
 x a
 
 
-b
-
-b
 2a  c
 #3     a
 xa
@@ -512,19 +410,15 @@ xa
 xc     d
 #2aa   d
 xd    a
-
-
 #4    c
 xd
 xc
 xa
 #3c
 x  d
-b
 2dab
 #3   c
 xd
-
 
 #3   e
 xfd
@@ -535,9 +429,6 @@ x   a
 xh
 #2ghhe
 xh   g
-b
-
-
 #4d  c
 xc
 xa
@@ -549,7 +440,6 @@ xa
 3cd  c
 #4a
 
-
 xc
 #4d
 xc
@@ -559,11 +449,7 @@ x d
 xf   a
 xda cc
 xca b
-b
 
-
-
-b
 #4a   d
 x d
 x b
@@ -572,7 +458,6 @@ x a
 x d
 xa
 xc
-
 
 #4d   c
 xc
@@ -584,8 +469,6 @@ xf
 xh
 2ffg a
 #3dd  c
-
-
 xc
 #4a   d
 xc
@@ -595,8 +478,6 @@ xa
 xd
 xc
 xa
-b
-
 
 3ce  c
 #4  f
@@ -608,8 +489,6 @@ x f
 #4c
 xd
 xf
-
-
 xd
 #4c
 x f
@@ -621,8 +500,6 @@ x   e
 x f
 1cefecca
 
-
-b
 .
 #2 a a d
 xh
@@ -632,10 +509,7 @@ xf
 xc  b
 2aa c a
 #3d
-
-
 x   c
-b
 #2f  a
 xh
 xdf  d
@@ -646,9 +520,6 @@ xl
 xhif
 
 
-b
-
-b
 #2fhi
 xhif
 xi  h
@@ -656,12 +527,9 @@ xi  h
 xi
 2hi f
 #3     a
-
-
 xh
 #2f aa
 xh     a
-b
 2df  d
 #3fh  a
 xdf
@@ -669,30 +537,24 @@ xdf
 xa
 2c
 
-
 2a b d
 #3d
 x    c
 #2f a a
 xa  cd
-b
 #2d  cc
 xca b
 2a  cd
 #3d
-
-
 x    c
 2i a a
 #3   f d
 xh
 #2f aa
 xda c
-b
 2caa c
 #3   c
 xd
-
 
 3.fdaa
 4    d
@@ -705,10 +567,6 @@ x    a
 #3c
 xa
 
-
-b
-
-b
 2da  c
 #3c
 x  d
@@ -717,19 +575,15 @@ x  d
 xf
 2daa c
 
-
 #3c
 x  d
 #3 abc  a
 xa
 x  a
 x e
-b
 2.aac  a
 #4 d
 x b
-
-
 #3 a
 x  d
 x  c
@@ -738,9 +592,6 @@ x  a
 x   c
 1     a
 .
-b
-b
-
 
 
 e
