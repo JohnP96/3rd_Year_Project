@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 06/03/2023
+ * Last edited: 22/03/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
@@ -88,7 +88,7 @@ public class  TabInterface {
      * i.e, the number of different chords divided by the total number of chords
      * Returns max integer value if they are different lengths.
      */
-    public static float compareTabs(String generatedTabName, String originalTabName) throws FileNotFoundException {
+    public static double compareTabs(String generatedTabName, String originalTabName) throws FileNotFoundException {
         float differences = 0;
         float numChords = 0;
         File generatedTab = new File("generated_tab/" + generatedTabName + ".tab");
@@ -112,6 +112,12 @@ public class  TabInterface {
             numChords++;
             genLine = genScan.next();
             origLine = origScan.next();
+            while(genLine.equals("")){
+                genLine = genScan.next();
+            }
+            while(origLine.equals("")){
+                origLine = origScan.next();
+            }
             if(!origLine.equals(genLine)){
                 differences++;
             }
@@ -142,14 +148,14 @@ public class  TabInterface {
             int counter = 0;
 
             while (luteFileScanner.hasNext()) {
-                line = luteFileScanner.next();
-
+                line = luteFileScanner.next().trim();
+                //System.out.println("Line: " + line + "\nLength: " + line.length());
                 // Ignores unimportant lines like those for bar breaks etc.
-                if(line.length() > 2 && line.toCharArray()[0] != '-'
+                if(line.length() > 1 && line.toCharArray()[0] != '-'
                         && line.toCharArray()[0] != '{') {
 
                     counter++; // Counter for when to add bar breaks
-                    lineChars = line.trim().toCharArray();
+                    lineChars = line.toCharArray();
 
                     int flag = 1;
                     if (lineChars[0] == '#') {
@@ -160,9 +166,10 @@ public class  TabInterface {
                     for (int i = flag; i < lineChars.length; i++) {
                         stringNum++;
                         char character = lineChars[i];
-
+                        //System.out.println("Char in: " + character);
                         if (character != '.') {
                             int unicode = lineChars[i];
+                            //System.out.println("Unicode: " + unicode);
 
                             if (unicode != 32) {
 
@@ -174,6 +181,7 @@ public class  TabInterface {
                                     } else if (unicode < 106) {
                                         writer.append("N1");
                                         character = (char) (unicode - 56);
+                                    // We ignore 106 as j is not used in lute tablature
                                     } else if (unicode > 106) {
                                         writer.append("N1");
                                         character = (char) (unicode - 57);
@@ -191,6 +199,7 @@ public class  TabInterface {
                                     }
                                 }
                             }
+                            //System.out.println("Char out: " + character);
                             writer.append(character);
                         }
                     }

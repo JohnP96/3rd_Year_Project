@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 06/03/2023
+ * Last edited: 22/03/2023
 
  * Description: Implementation of a genetic algorithm to transcribe guitar tablature
  * from a MIDI file input.
@@ -84,7 +84,12 @@ public class TabGA {
             tab.calculateFitness();
         }
         Collections.sort(population);
-        return new ArrayList<>(population.subList(0, populationSize/2));
+        if(populationSize > 1) {
+            return new ArrayList<>(population.subList(0, populationSize - (Math.ceilDiv(populationSize, 10))));
+        }
+        else{
+            return new ArrayList<>(population);
+        }
     }
 
     /**
@@ -104,7 +109,7 @@ public class TabGA {
      * combining the chords from the first parent before the break and chords from
      * the second parent after the break, then vice versa for the second child.
      */
-    private void crossover() throws Exception{
+    private boolean crossover() throws Exception{
         ArrayList<Tab> children = new ArrayList<>();
         ArrayList<Tab> parents = selection();
         int numChords = population.get(0).getChords().size();
@@ -140,7 +145,14 @@ public class TabGA {
             children.add(new Tab(childOne));
             children.add(new Tab(childTwo));
         }
-        population = children;
+        if(children.size() > 0) {
+            population = children;
+        }
+        else{
+            population = parents;
+        }
+        populationSize = population.size();
+        return populationSize < 2;
     }
 
     /**
@@ -150,7 +162,10 @@ public class TabGA {
     public Tab mostFitTab() throws Exception{
         for (int gen=0; gen<numGenerations; gen++){
             //System.out.println("Generation: " + (gen+1));
-            crossover();
+            if(crossover()){
+                System.out.println("Could not complete all generations due to insufficient starting population.");
+                break;
+            }
         }
         for(Tab tab : population){
             tab.calculateFitness();
