@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 22/03/2023
+ * Last edited: 24/03/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
@@ -150,63 +150,65 @@ public class  TabInterface {
             while (luteFileScanner.hasNext()) {
                 line = luteFileScanner.next().trim();
                 //System.out.println("Line: " + line + "\nLength: " + line.length());
-                // Ignores unimportant lines like those for bar breaks etc.
-                if(line.length() > 1 && line.toCharArray()[0] != '-'
-                        && line.toCharArray()[0] != '{') {
-
-                    counter++; // Counter for when to add bar breaks
+                // Ignores unimportant lines like those for bar breaks, titles etc.
+                if(line.length() > 1) {
                     lineChars = line.toCharArray();
+                    char firstChar = lineChars[0];
+                    if (firstChar != '-' && firstChar != '{' && firstChar != '%'
+                            && firstChar != '$' && firstChar != 'F') {
 
-                    int flag = 1;
-                    if (lineChars[0] == '#') {
-                        flag = 2;
-                    }
-                    writer.append('0');
-                    int stringNum = -1;
-                    for (int i = flag; i < lineChars.length; i++) {
-                        stringNum++;
-                        char character = lineChars[i];
-                        //System.out.println("Char in: " + character);
-                        if (character != '.') {
-                            int unicode = lineChars[i];
-                            //System.out.println("Unicode: " + unicode);
+                        counter++; // Counter for when to add bar breaks
 
-                            if (unicode != 32) {
-
-                                /* The lute is tuned 3 semitones higher than a guitar one every string
-                                * but the 3rd highest, which is tuned 2 semitones higher */
-                                if (stringNum != 2){
-                                    if (unicode < 104) {
-                                        character = (char) (unicode - 46);
-                                    } else if (unicode < 106) {
-                                        writer.append("N1");
-                                        character = (char) (unicode - 56);
-                                    // We ignore 106 as j is not used in lute tablature
-                                    } else if (unicode > 106) {
-                                        writer.append("N1");
-                                        character = (char) (unicode - 57);
-                                    }
-                                }
-                                else{
-                                    if (unicode < 104) {
-                                        character = (char) (unicode - 47);
-                                    } else if (unicode < 106) {
-                                        writer.append("N1");
-                                        character = (char) (unicode - 57);
-                                    } else if (unicode > 106) {
-                                        writer.append("N1");
-                                        character = (char) (unicode - 58);
-                                    }
-                                }
-                            }
-                            //System.out.println("Char out: " + character);
-                            writer.append(character);
+                        int flag = 1;
+                        if (lineChars[0] == '#') {
+                            flag = 2;
                         }
-                    }
-                    writer.append('\n');
-                    // Bar breaks are added at the same intervals as in the generated tab
-                    if(counter % 10 == 0){
-                        writer.append("b\n\nb\n");
+                        writer.append('0');
+                        int stringNum = -1;
+                        for (int i = flag; i < lineChars.length; i++) {
+                            stringNum++;
+                            char character = lineChars[i];
+                            //System.out.println("Char in: " + character);
+                            if (character != '.') {
+                                int unicode = lineChars[i];
+                                //System.out.println("Unicode: " + unicode);
+
+                                if (unicode != 32) {
+
+                                    /* The lute is tuned 3 semitones higher than a guitar one every string
+                                     * but the 3rd highest, which is tuned 2 semitones higher */
+                                    if (stringNum != 2) {
+                                        if (unicode < 104) {
+                                            character = (char) (unicode - 46);
+                                        } else if (unicode < 106) {
+                                            writer.append("N1");
+                                            character = (char) (unicode - 56);
+                                            // We ignore 106 as j is not used in lute tablature
+                                        } else if (unicode > 106) {
+                                            writer.append("N1");
+                                            character = (char) (unicode - 57);
+                                        }
+                                    } else {
+                                        if (unicode < 104) {
+                                            character = (char) (unicode - 47);
+                                        } else if (unicode < 106) {
+                                            writer.append("N1");
+                                            character = (char) (unicode - 57);
+                                        } else if (unicode > 106) {
+                                            writer.append("N1");
+                                            character = (char) (unicode - 58);
+                                        }
+                                    }
+                                }
+                                //System.out.println("Char out: " + character);
+                                writer.append(character);
+                            }
+                        }
+                        writer.append('\n');
+                        // Bar breaks are added at the same intervals as in the generated tab
+                        if (counter % 10 == 0) {
+                            writer.append("b\n\nb\n");
+                        }
                     }
                 }
             }

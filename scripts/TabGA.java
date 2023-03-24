@@ -3,13 +3,14 @@
 
  * Author: John Pederson
 
- * Last edited: 22/03/2023
+ * Last edited: 24/03/2023
 
  * Description: Implementation of a genetic algorithm to transcribe guitar tablature
  * from a MIDI file input.
 
  * Bug fixes/improvements: Error handling needs to be improved.
  ************************************************************************************/
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -39,8 +40,14 @@ public class TabGA {
         this.mutationRate = mutationRate;
         population = new ArrayList<>();
         rand = new Random();
-        MidiReader reader = new MidiReader(name + ".midi");
-        for (int p=0; p<populationSize; p++){
+        MidiReader reader = null;
+        try {
+             reader = new MidiReader(name + ".mid");
+        }
+        catch (FileNotFoundException e){
+             reader = new MidiReader(name + ".midi");
+        }
+        for (int p = 0; p < populationSize; p++) {
             Tab tab = new Tab(reader.getNoteSequence(rand), rand);
             population.add(tab);
         }
@@ -109,7 +116,7 @@ public class TabGA {
      * combining the chords from the first parent before the break and chords from
      * the second parent after the break, then vice versa for the second child.
      */
-    private boolean crossover() throws Exception{
+    private void crossover() throws Exception{
         ArrayList<Tab> children = new ArrayList<>();
         ArrayList<Tab> parents = selection();
         int numChords = population.get(0).getChords().size();
@@ -145,14 +152,9 @@ public class TabGA {
             children.add(new Tab(childOne));
             children.add(new Tab(childTwo));
         }
-        if(children.size() > 0) {
-            population = children;
-        }
-        else{
-            population = parents;
-        }
+        population = children;
+
         populationSize = population.size();
-        return populationSize < 2;
     }
 
     /**
@@ -161,11 +163,8 @@ public class TabGA {
      */
     public Tab mostFitTab() throws Exception{
         for (int gen=0; gen<numGenerations; gen++){
-            //System.out.println("Generation: " + (gen+1));
-            if(crossover()){
-                System.out.println("Could not complete all generations due to insufficient starting population.");
-                break;
-            }
+            System.out.println("Generation: " + (gen+1) + " PopSize: " + populationSize);
+            crossover();
         }
         for(Tab tab : population){
             tab.calculateFitness();
