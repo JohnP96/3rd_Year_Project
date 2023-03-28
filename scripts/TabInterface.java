@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 24/03/2023
+ * Last edited: 27/03/2023
 
  * Description: Class for interacting with TAB software created by Wayne Cripps
 
@@ -81,12 +81,12 @@ public class  TabInterface {
 
     /**
      * Compares a generated .tab file with the original .tab file. Returning the
-     * proportion of different chords between them.
+     * proportion of chords that are the same for both tabs.
      * @param generatedTabName A string denoting the name of the generated .tab file
      * @param originalTabName A string denoting the name of the original .tab file
-     * @return An integer denoting the proportion of differences between the tabs.
-     * i.e, the number of different chords divided by the total number of chords
-     * Returns max integer value if they are different lengths.
+     * @return A double denoting the proportion of matching chords between the two tabs.
+     * i.e, 1 minus the number of different chords divided by the total number of chords
+     * Returns max integer value if tabs are different lengths.
      */
     public static double compareTabs(String generatedTabName, String originalTabName) throws FileNotFoundException {
         float differences = 0;
@@ -126,7 +126,7 @@ public class  TabInterface {
         if(genScan.hasNext() || origScan.hasNext()){
             return Integer.MAX_VALUE;
         }
-        return differences/numChords;
+        return 1-(differences/numChords);
     }
 
     /**
@@ -154,8 +154,8 @@ public class  TabInterface {
                 if(line.length() > 1) {
                     lineChars = line.toCharArray();
                     char firstChar = lineChars[0];
-                    if (firstChar != '-' && firstChar != '{' && firstChar != '%'
-                            && firstChar != '$' && firstChar != 'F') {
+                    if (firstChar != '-' && firstChar != '{' && firstChar != '%' && firstChar != 'b'
+                            && firstChar != '$' && firstChar != 'F' && firstChar != 'S' && firstChar != 'e') {
 
                         counter++; // Counter for when to add bar breaks
 
@@ -168,10 +168,10 @@ public class  TabInterface {
                         for (int i = flag; i < lineChars.length; i++) {
                             stringNum++;
                             char character = lineChars[i];
-                            //System.out.println("Char in: " + character);
+//                            System.out.println("Char in: " + character);
                             if (character != '.') {
                                 int unicode = lineChars[i];
-                                //System.out.println("Unicode: " + unicode);
+//                                System.out.println("Unicode: " + unicode);
 
                                 if (unicode != 32) {
 
@@ -200,7 +200,7 @@ public class  TabInterface {
                                         }
                                     }
                                 }
-                                //System.out.println("Char out: " + character);
+//                                System.out.println("Char out: " + character);
                                 writer.append(character);
                             }
                         }

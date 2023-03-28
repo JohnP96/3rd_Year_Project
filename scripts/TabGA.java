@@ -11,6 +11,7 @@
  * Bug fixes/improvements: Error handling needs to be improved.
  ************************************************************************************/
 import java.io.FileNotFoundException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
@@ -87,8 +88,10 @@ public class TabGA {
      * @return An ArrayList of the selected Tab objects
      */
     private ArrayList<Tab> selection(){
+        ArrayList<Integer> sampling = new ArrayList<>();
+        int totalFitness = 0;
         for(Tab tab : population){
-            tab.calculateFitness();
+            totalFitness += tab.calculateFitness();
         }
         Collections.sort(population);
         if(populationSize > 1) {
@@ -163,7 +166,6 @@ public class TabGA {
      */
     public Tab mostFitTab() throws Exception{
         for (int gen=0; gen<numGenerations; gen++){
-            System.out.println("Generation: " + (gen+1) + " PopSize: " + populationSize);
             crossover();
         }
         for(Tab tab : population){
