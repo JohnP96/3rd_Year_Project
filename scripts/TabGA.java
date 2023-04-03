@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 24/03/2023
+ * Last edited: 03/04/2023
 
  * Description: Implementation of a genetic algorithm to transcribe guitar tablature
  * from a MIDI file input.
@@ -14,6 +14,7 @@ import java.io.FileNotFoundException;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 public class TabGA {
@@ -84,22 +85,31 @@ public class TabGA {
 
     /**
      * Selects the pool of individuals to use as parents in the
-     * crossover method.
+     * crossover method using stochastic universal sampling.
      * @return An ArrayList of the selected Tab objects
      */
     private ArrayList<Tab> selection(){
-        ArrayList<Integer> sampling = new ArrayList<>();
-        int totalFitness = 0;
+        Tab[] selected = new Tab[populationSize];
+        double totalFitness = 0;
         for(Tab tab : population){
             totalFitness += tab.calculateFitness();
         }
-        Collections.sort(population);
-        if(populationSize > 1) {
-            return new ArrayList<>(population.subList(0, populationSize - (Math.ceilDiv(populationSize, 10))));
+        double interval = totalFitness/populationSize; // Create equal intervals between each selected member
+        double startPoint = rand.nextDouble()*interval;
+        double fitnessLimit;
+        int fitnessSum;
+        int popIndex;
+        for(int i = 0; i<populationSize; i++){
+            fitnessLimit = startPoint + interval*i;
+            popIndex = 0;
+            fitnessSum = population.get(popIndex).getFitness();
+            while (fitnessSum < fitnessLimit){
+                popIndex++;
+                fitnessSum += population.get(popIndex).getFitness();
+            }
+            selected[i] = population.get(popIndex);
         }
-        else{
-            return new ArrayList<>(population);
-        }
+        return new ArrayList<>(List.of(selected));
     }
 
     /**
@@ -156,8 +166,6 @@ public class TabGA {
             children.add(new Tab(childTwo));
         }
         population = children;
-
-        populationSize = population.size();
     }
 
     /**
