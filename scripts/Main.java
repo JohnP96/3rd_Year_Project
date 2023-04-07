@@ -19,7 +19,7 @@ public class Main {
                 TabInterface.luteToGuitar(fileName, fileName);
                 for (int i = 0; i < 50; i++) {
                     long startTime = System.currentTimeMillis();
-                    TabGA ga = new TabGA(fileName, 100, 10, 0.01);
+                    TabGA ga = new TabGA(fileName, 500, 100, 0.01);
                     Tab tab = ga.mostFitTab();
                     TabInterface.createTabFile(fileName, tab);
                     results.add(TabInterface.compareTabs(fileName, fileName));
