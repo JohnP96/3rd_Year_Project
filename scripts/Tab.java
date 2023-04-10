@@ -31,7 +31,36 @@ public class Tab implements Comparable<Tab>{
         * to the array of positions */
         fitness = 0; // Fitness is initialised to 0 to be calculated later
         chords = new ArrayList<>();
-
+        int octave;
+        int n;
+        boolean inRangeHigh = true;
+        boolean inRangeLow = true;
+        for(GuitarNote note : notes){
+            octave = note.getOctave();
+            n = note.getNote().ordinal();
+            if(inRangeHigh && (octave > 5 || octave == 5 && n > Notes.G.ordinal())) {
+                inRangeHigh = false;
+                if(inRangeLow){
+                    for(GuitarNote gn : notes){
+                        gn.setOctave(gn.getOctave()-1);
+                    }
+                }
+                else{
+                    throw new Exception("Composition not in range");
+                }
+            }
+            else if (inRangeLow && (octave < 2 || octave == 2 && n < Notes.E.ordinal())){
+                inRangeLow = false;
+                if(inRangeHigh){
+                    for(GuitarNote gn : notes){
+                        gn.setOctave(gn.getOctave()+1);
+                    }
+                }
+                else{
+                    throw new Exception("Composition not in range");
+                }
+            }
+        }
         Chord chord = new Chord(rand);
         long lastTick = 0;
         for (GuitarNote note : notes) {

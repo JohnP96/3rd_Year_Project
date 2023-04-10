@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 03/03/2023
+ * Last edited: 10/04/2023
 
  * Description: Contains the possible fretboard positions of the given note. These
  * are encoded as integers with 0 to 6 as the open strings from high to low and
@@ -247,6 +247,164 @@ public class GuitarNote implements Comparable<GuitarNote>{
         this.currentPosition = currentPosition;
         fretNumber = currentPosition / 6;
         stringNumber = currentPosition % 6;
+    }
+
+    public void setOctave(int octave){
+        possiblePositions.clear();
+        this.octave = octave;
+        ArrayList<Integer> octavePositions = new ArrayList<>();
+        if(octave == 2){
+            for(int i=5; i<53; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=4; i<22; i=i+6){
+                octavePositions.add(i);
+            }
+        }
+        else if(octave == 3){
+            for(int i=53; i<125; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=22; i<94; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=3; i<63; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=2; i<32; i=i+6){
+                octavePositions.add(i);
+            }
+            octavePositions.add(1);
+        }
+        else if(octave == 4){
+            for(int i=125; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=94; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=32; i<104; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=63; i<135; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=7; i<79; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=0; i<48; i=i+6){
+                octavePositions.add(i);
+            }
+        }
+        else if(octave == 5){
+            for(int i=104; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=135; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=79; i<150; i=i+6){
+                octavePositions.add(i);
+            }
+            for(int i=48; i<120; i=i+6){
+                octavePositions.add(i);
+            }
+        }
+        else if(octave == 6){
+            for(int i=144; i>=120; i=i-6){
+                octavePositions.add(i);
+            }
+        }
+        else{
+            for(int i=0; i<150; i++){
+                octavePositions.add(i);
+            }
+        }
+
+        if(note == Notes.C){
+            for (Integer i : cPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.C_SHARP){
+            for (Integer i : cSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.D){
+            for (Integer i : dPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.D_SHARP){
+            for (Integer i : dSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.E){
+            for (Integer i : ePositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.F){
+            for (Integer i : fPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.F_SHARP){
+            for (Integer i : fSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.G){
+            for (Integer i : gPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.G_SHARP){
+            for (Integer i : gSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.A){
+            for (Integer i : aPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.A_SHARP){
+            for (Integer i : aSharpPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
+        else if(note == Notes.B){
+            for (Integer i : bPositions){
+                if(octavePositions.contains(i)){
+                    possiblePositions.add(i);
+                }
+            }
+        }
     }
 
     /**
