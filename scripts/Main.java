@@ -9,79 +9,45 @@ public class Main {
     public static void main(String[] args){
 
         try {
-            File dir = new File("midi_files");
-            ArrayList<Double> avgResults = new ArrayList<>();
-            long avgTime = 0;
-            for(File file : Objects.requireNonNull(dir.listFiles())) {
-                String fileName = file.getName().replaceFirst("[.][^.]+$", "");
-                System.out.println(fileName);
-                ArrayList<Double> results = new ArrayList<>();
-                TabInterface.luteToGuitar(fileName, fileName);
-                for (int i = 0; i < 50; i++) {
-                    long startTime = System.currentTimeMillis();
-                    TabGA ga = new TabGA(fileName, 500, 100, 0.01);
-                    Tab tab = ga.mostFitTab();
-                    TabInterface.createTabFile(fileName, tab);
-                    results.add(TabInterface.compareTabs(fileName, fileName));
-                    long endTime = System.currentTimeMillis();
-                    avgTime += (endTime-startTime);
-                    System.out.println("Iteration: " + (i+1) + " Time taken: " + (endTime - startTime));
-                }
-                double avg = 0;
-                for (Double i : results) {
-                    if(i == Integer.MAX_VALUE){
-                        System.out.println("Comparison Error");
-                        System.out.println(fileName);
-                        throw new Exception();
-                    }
-                    avg += i;
-                }
-                avgResults.add(avg/results.size());
-            }
-            double avgAverage = 0;
-            for(Double i : avgResults){
-                avgAverage += i;
-            }
-            System.out.println(avgResults);
-            System.out.println(avgAverage/avgResults.size());
-            System.out.println("Average time taken: " + (avgTime/50) + "ms");
-
-
-//                if(fileName.equals("si_par_souffrir")) {
-//                    Random rand = new Random();
-//                    MidiReader mr = new MidiReader(fileName + ".mid");
-//                    GuitarNote[] notes = mr.getNoteSequence(rand);
-//                    Tab tab = new Tab(notes, rand);
-//                    int chordCount = 0;
-//                    for(Chord chord : tab.getChords()){
-//                        chordCount++;
-//                        if(chordCount > 124 && chordCount < 128){
-//                            System.out.println(chord);
-//                            for(GuitarNote note : chord.getNotes()){
-//                                System.out.println(note + "\n");
-//                            }
-//                        }
-//                    }
-//                    System.out.println(chordCount);
-//                    for(Chord chord : tab.getChords()){
-//                        System.out.println(chord);
-////                    }
-//                }
-//            }
-
+//            File dir = new File("midi_files");
+//            ArrayList<Double> avgResults = new ArrayList<>();
+//            long avgTime = 0;
 //            for(File file : Objects.requireNonNull(dir.listFiles())) {
 //                String fileName = file.getName().replaceFirst("[.][^.]+$", "");
-//                MidiReader mr = new MidiReader(fileName + ".mid");
-//                GuitarNote[] notes = mr.getNoteSequence(new Random());
-//                int count = 0;
-//                for (GuitarNote n : notes) {
-//                    count++;
-//                    if(n.getOctave() == 2 && n.getNote() == Notes.F){
-//                        System.out.println(fileName);
-//                        System.out.println("Note number " + count);
-//                    }
+//                System.out.println(fileName);
+//                ArrayList<Double> results = new ArrayList<>();
+//                TabInterface.luteToGuitar(fileName, fileName);
+//                for (int i = 0; i < 100; i++) {
+//                    long startTime = System.currentTimeMillis();
+//                    TabGA ga = new TabGA(fileName, 500, 100, 0.01);
+//                    Tab tab = ga.mostFitTab();
+//                    TabInterface.createTabFile(fileName, tab);
+//                    results.add(TabInterface.compareTabs(fileName, fileName));
+//                    long endTime = System.currentTimeMillis();
+//                    avgTime += (endTime-startTime);
+//                    System.out.println("Iteration: " + (i+1) + " Time taken: " + (endTime - startTime));
 //                }
+//                double avg = 0;
+//                for (Double i : results) {
+//                    if(i == Integer.MAX_VALUE){
+//                        System.out.println("Comparison Error");
+//                        System.out.println(fileName);
+//                        throw new Exception();
+//                    }
+//                    avg += i;
+//                }
+//                avgResults.add(avg/results.size());
+//                System.out.println(fileName + " results: " + avg/ results.size());
 //            }
+//            double avgAverage = 0;
+//            for(Double i : avgResults){
+//                avgAverage += i;
+//            }
+//            System.out.println(avgResults);
+//            System.out.println(avgAverage/avgResults.size());
+//            System.out.println("Average time taken: " + (avgTime/50) + "ms");
+
+
 
 
             /*Integer[][] notes = new Integer[12][];

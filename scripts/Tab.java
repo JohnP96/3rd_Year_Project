@@ -3,7 +3,7 @@
 
  * Author: John Pederson
 
- * Last edited: 03/04/2023
+ * Last edited: 10/04/2023
 
  * Description: Object containing all fret positions within a guitar tab
 
@@ -80,7 +80,7 @@ public class Tab implements Comparable<Tab>{
         for (Chord chord : chords){
             for (GuitarNote note : chord.getNotes()){
                 fitness += 24-note.getFretNumber();
-                fitness += (24-(note.getCurrentPosition() - lastNote.getCurrentPosition())) * 2;
+                fitness += Math.sqrt(Math.pow(note.getFretNumber() - lastNote.getFretNumber(), 2));
                 lastNote = note;
             }
         }

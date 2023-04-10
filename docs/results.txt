@@ -1,7 +1,12 @@
 Testing fitness:
 
-50 iterations
+100 iterations
 pop 500, gen 100, mute 0.01
 Just using distance between notes and up fretboard
-Result: 0.479
-
+Results: 
+mud:0.413
+date:0.335
+ne:0.356
+panis:0.394
+potessi:0.371
+Avg:0.373
