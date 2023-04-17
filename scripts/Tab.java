@@ -37,7 +37,7 @@ public class Tab implements Comparable<Tab>{
         for(GuitarNote note : notes){
             octave = note.getOctave();
             n = note.getNote().ordinal();
-            if(inRangeHigh && (octave > 5 || octave == 5 && n > Notes.G.ordinal())) {
+            if(inRangeHigh && (octave > 6 || octave == 6 && n > Notes.G.ordinal())) {
                 inRangeHigh = false;
                 if(inRangeLow){
                     for(GuitarNote gn : notes){
