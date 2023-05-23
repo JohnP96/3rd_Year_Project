@@ -42,7 +42,7 @@ public class TabGA {
         this.mutationRate = mutationRate;
         population = new ArrayList<>();
         rand = new Random();
-        MidiReader reader = null;
+        MidiReader reader;
         try {
              reader = new MidiReader(name + ".mid");
         }

@@ -24,7 +24,7 @@ public class GuitarNote implements Comparable<GuitarNote>{
     private int stringNumber;
     private int fretNumber;
     private int octave;
-    private Random rand;
+    private final Random rand;
 
 
     /**

@@ -19,7 +19,7 @@ import java.util.Random;
 
 public class MidiReader {
 
-    private Track track;
+    private final Track track;
 
     /**
      * Creates an object for reading MIDI files into GuitarNote objects.
