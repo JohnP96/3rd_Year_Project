@@ -11,7 +11,6 @@
  * Bug fixes/improvements: Error handling needs to be improved.
  ************************************************************************************/
 import java.io.FileNotFoundException;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -90,25 +89,40 @@ public class TabGA {
      */
     private ArrayList<Tab> selection(){
         Tab[] selected = new Tab[populationSize];
-        double totalFitness = 0;
-        for(Tab tab : population){
-            totalFitness += tab.calculateFitness();
-        }
-        double interval = totalFitness/populationSize; // Create equal intervals between each selected member
-        double startPoint = rand.nextDouble()*interval;
-        double fitnessLimit;
-        int fitnessSum;
-        int popIndex;
-        for(int i = 0; i<populationSize; i++){
-            fitnessLimit = startPoint + interval*i;
-            popIndex = 0;
-            fitnessSum = population.get(popIndex).getFitness();
-            while (fitnessSum < fitnessLimit){
-                popIndex++;
-                fitnessSum += population.get(popIndex).getFitness();
+//        double totalFitness = 0;
+//        for(Tab tab : population){
+//            totalFitness += tab.calculateFitness();
+//        }
+//        double interval = totalFitness/populationSize; // Create equal intervals between each selected member
+////        System.out.println("Interval = " + interval);
+//        double startPoint = rand.nextDouble()*interval;
+//        double fitnessLimit;
+//        int fitnessSum;
+//        int popIndex;
+//        for(int i = 0; i<populationSize; i++){
+//            fitnessLimit = startPoint + interval*i;
+//            popIndex = 0;
+//            fitnessSum = population.get(popIndex).getFitness();
+//            while (fitnessSum < fitnessLimit){
+//                popIndex++;
+//                fitnessSum += population.get(popIndex).getFitness();
+//            }
+////            System.out.println("i = " + i + "and popIndex = " + popIndex);
+//            selected[i] = population.get(popIndex);
+//        }
+
+//        Tournament Selection
+        int tourneySize = 10;
+        for(int i=0; i<populationSize;i++) {
+            ArrayList<Tab> tourney = new ArrayList<>();
+            for(int j=0; j<tourneySize; j++){
+                tourney.add(population.get(rand.nextInt(populationSize)));
             }
-            selected[i] = population.get(popIndex);
+            Collections.sort(tourney);
+            selected[i] = tourney.get(0);
         }
+
+
         return new ArrayList<>(List.of(selected));
     }
 
@@ -119,8 +133,12 @@ public class TabGA {
     private void mutate(Chord chord) throws Exception{
         ArrayList<GuitarNote> notes = chord.getNotes();
         chord.clearNotes();
-        for(GuitarNote note : notes){
-            chord.addNote(note);
+        ArrayList<Integer> unoccupiedStrings = new ArrayList<>();
+        for(int i=0; i<6; i++){
+            unoccupiedStrings.add(i);
+        }
+        if(!chord.addNotes(notes, 0, unoccupiedStrings)){
+            throw new Exception("Chord error");
         }
     }
 
@@ -129,9 +147,8 @@ public class TabGA {
      * combining the chords from the first parent before the break and chords from
      * the second parent after the break, then vice versa for the second child.
      */
-    private void crossover() throws Exception{
+    private void crossover(ArrayList<Tab> parents) throws Exception{
         ArrayList<Tab> children = new ArrayList<>();
-        ArrayList<Tab> parents = selection();
         int numChords = population.get(0).getChords().size();
         int parentsSize;
         int randomParent;
@@ -145,11 +162,14 @@ public class TabGA {
             parents.remove(randomParent);
             /* In the case of the breakpoint being 0, the parents simply move to the next
                generation as they are */
-            int breakPoint = rand.nextInt(numChords);
-            ArrayList<Chord> childOne = new ArrayList<>(parentOne.subList(0, breakPoint));
-            ArrayList<Chord> childTwo = new ArrayList<>(parentTwo.subList(0, breakPoint));
-            childOne.addAll(parentTwo.subList(breakPoint, numChords));
-            childTwo.addAll(parentOne.subList(breakPoint, numChords));
+            int breakPointOne = rand.nextInt(numChords);
+            int breakPointTwo = rand.nextInt(breakPointOne, numChords);
+            ArrayList<Chord> childOne = new ArrayList<>(parentOne.subList(0, breakPointOne));
+            ArrayList<Chord> childTwo = new ArrayList<>(parentTwo.subList(0, breakPointOne));
+            childOne.addAll(parentTwo.subList(breakPointOne, breakPointTwo));
+            childTwo.addAll(parentOne.subList(breakPointOne, breakPointTwo));
+            childOne.addAll(parentTwo.subList(breakPointTwo, numChords));
+            childTwo.addAll(parentOne.subList(breakPointTwo, numChords));
             for(Chord chord : childOne){
                 mutationRand = rand.nextDouble(100);
                 if(mutationRand < mutationRate){
@@ -173,12 +193,25 @@ public class TabGA {
      * function for the assigned number of generations.
      */
     public Tab mostFitTab() throws Exception{
+        double avgFitness;
         for (int gen=0; gen<numGenerations; gen++){
-            crossover();
+            avgFitness = 0;
+            for(Tab tab : population){
+                avgFitness += tab.calculateFitness();
+
+            }
+//            System.out.println("Gen " + gen + ": " + avgFitness/populationSize);
+            ArrayList<Tab> parents = selection();
+//
+//            System.out.println(avgFitness/populationSize);
+            crossover(parents);
+
         }
+        avgFitness = 0;
         for(Tab tab : population){
-            tab.calculateFitness();
+            avgFitness += tab.calculateFitness();
         }
+//        System.out.println("Next Gen: " + avgFitness/populationSize);
         Collections.sort(population);
         return population.get(0);
     }

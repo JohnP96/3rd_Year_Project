@@ -32,18 +32,18 @@ public class GuitarNote implements Comparable<GuitarNote>{
      * for each note, the commented parts are the positions for 24 frets.
      */
 
-    public static final Integer[] cPositions = {7, 22, 32, 48, 53, 63, 79, 94, 104, 120, 125, 135};
-    public static final Integer[] cSharpPositions = {13, 28, 38, 54, 59, 69, 85, 100, 110, 126, 131, 141};
-    public static final Integer[] dPositions = {3, 19, 34, 44, 60, 65, 75, 91, 106, 116, 132, 137, 147};
-    public static final Integer[] dSharpPositions = {9, 25, 40, 50, 66, 71, 81, 97, 112, 122, 138, 143};
-    public static final Integer[] ePositions = {0, 5, 15, 31, 46, 56, 72, 77, 87, 103, 118, 128, 144, 149};
-    public static final Integer[] fPositions= {6, 11, 21, 37, 52, 62, 78, 83, 93, 109, 124, 134};
-    public static final Integer[] fSharpPositions= {12, 17, 27, 43, 58, 68, 84, 89, 99, 115, 130, 140};
-    public static final Integer[] gPositions = {2, 18, 23, 33, 49, 64, 74, 90, 95, 105, 121, 136, 146};
-    public static final Integer[] gSharpPositions = {8, 24, 29, 39, 55, 70, 80, 96, 101, 111, 127, 142};
-    public static final Integer[] aPositions = {4, 14, 30, 35, 45, 61, 76, 86, 102, 107, 117, 133, 148};
-    public static final Integer[] aSharpPositions = {10, 20, 36, 41, 51, 67, 82, 92, 108, 113, 123, 139};
-    public static final Integer[] bPositions = {1, 16, 26, 42, 47, 57, 73, 88, 98, 114, 119, 129, 145};
+    public static final Integer[] cPositions = {7, 22, 32, 48, 53, 63, 79, 94};//, 104, 120, 125, 135};
+    public static final Integer[] cSharpPositions = {13, 28, 38, 54, 59, 69, 85};//, 100, 110, 126, 131, 141};
+    public static final Integer[] dPositions = {3, 19, 34, 44, 60, 65, 75, 91};//, 106, 116, 132, 137, 147};
+    public static final Integer[] dSharpPositions = {9, 25, 40, 50, 66, 71, 81};//, 97, 112, 122, 138, 143};
+    public static final Integer[] ePositions = {0, 5, 15, 31, 46, 56, 72, 77, 87};//, 103, 118, 128, 144, 149};
+    public static final Integer[] fPositions= {6, 11, 21, 37, 52, 62, 78, 83, 93};//, 109, 124, 134};
+    public static final Integer[] fSharpPositions= {12, 17, 27, 43, 58, 68, 84, 89};//, 99, 115, 130, 140};
+    public static final Integer[] gPositions = {2, 18, 23, 33, 49, 64, 74, 90, 95};//, 105, 121, 136, 146};
+    public static final Integer[] gSharpPositions = {8, 24, 29, 39, 55, 70, 80};//, 96, 101, 111, 127, 142};
+    public static final Integer[] aPositions = {4, 14, 30, 35, 45, 61, 76, 86};//, 102, 107, 117, 133, 148};
+    public static final Integer[] aSharpPositions = {10, 20, 36, 41, 51, 67, 82, 92};//, 108, 113, 123, 139};
+    public static final Integer[] bPositions = {1, 16, 26, 42, 47, 57, 73, 88};//, 98, 114, 119, 129, 145};
 
 
     /**
@@ -470,6 +470,20 @@ public class GuitarNote implements Comparable<GuitarNote>{
     }
 
     /**
+     * Assigns a random fret position on a string other than the specified string
+     * @param string an integer representing the string
+     * @return a boolean denoting whether a new position was
+     *         successfully selected
+     */
+    public boolean removeString(int string){
+        if (string < 0 || string > 5){
+            return false;
+        }
+        possiblePositions.removeIf(pos -> pos % 6 == string);
+        return true;
+    }
+
+    /**
      * Moves the note position to a different string
      * @param distance the number of strings to move the note by (negative
      *                 moves higher and positive lower)
@@ -485,13 +499,6 @@ public class GuitarNote implements Comparable<GuitarNote>{
     }
 
     public int compareTo(GuitarNote note) {
-        if(this.octave < note.getOctave()){
-            return -1;
-        }
-        if(this.octave > note.getOctave()){
-            return 1;
-        }
-        // If notes are in same octave check the actual note values
-        return Integer.compare(this.note.ordinal(), note.getNote().ordinal());
+        return Integer.compare(this.stringNumber, note.stringNumber);
     }
 }

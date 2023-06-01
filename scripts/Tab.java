@@ -10,7 +10,7 @@
  * Bug fixes/improvements: Fitness function needs improving
  ************************************************************************************/
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.Random;
 
 public class Tab implements Comparable<Tab>{
@@ -40,6 +40,7 @@ public class Tab implements Comparable<Tab>{
             if(inRangeHigh && (octave > 6 || octave == 6 && n > Notes.G.ordinal())) {
                 inRangeHigh = false;
                 if(inRangeLow){
+                    System.out.println("Transposed up");
                     for(GuitarNote gn : notes){
                         gn.setOctave(gn.getOctave()-1);
                     }
@@ -51,6 +52,7 @@ public class Tab implements Comparable<Tab>{
             else if (inRangeLow && (octave < 2 || octave == 2 && n < Notes.E.ordinal())){
                 inRangeLow = false;
                 if(inRangeHigh){
+                    System.out.println("Transposed down");
                     for(GuitarNote gn : notes){
                         gn.setOctave(gn.getOctave()+1);
                     }
@@ -60,21 +62,51 @@ public class Tab implements Comparable<Tab>{
                 }
             }
         }
-        Chord chord = new Chord(rand);
+        ArrayList<GuitarNote> notesInChord = new ArrayList<>();
         long lastTick = 0;
         for (GuitarNote note : notes) {
+//            System.out.println(note);
             if (note.getStartTick() == lastTick) {
-                if(!chord.addNote(note)){
-                    throw new Exception("Error adding note: " + note);
-                }
+                notesInChord.add(note);
             }
             else {
-                chords.add(chord);
-                chord = new Chord(note, rand);
+                if(notesInChord.size() > 0) {
+//                    System.out.println(notesInChord);
+                    Chord chord = new Chord(rand);
+                    ArrayList<Integer> unoccupiedStrings = new ArrayList<>();
+                    for (int i = 0; i < 6; i++) {
+                        unoccupiedStrings.add(i);
+                    }
+//                    System.out.println(notesInChord);
+                    if(!chord.addNotes(notesInChord, 0, unoccupiedStrings)){
+                        throw new Exception("Chord not complete");
+                    }
+                    if(chord.getNotes().get(chord.getNotes().size()-1) == null) {
+                        System.out.println(chord);
+                    }
+                    chords.add(chord);
+                    notesInChord = new ArrayList<>();
+                    notesInChord.add(note);
+                }
             }
             lastTick = note.getStartTick();
         }
-        chords.add(chord);
+        if(notesInChord.size() > 0) {
+//            System.out.println(notesInChord);
+            Chord chord = new Chord(rand);
+            ArrayList<Integer> unoccupiedStrings = new ArrayList<>();
+            for (int i = 0; i < 6; i++) {
+                unoccupiedStrings.add(i);
+            }
+            if(!chord.addNotes(notesInChord, 0, unoccupiedStrings)){
+                throw new Exception("Chord not complete");
+            }
+            if(chord.getNotes().get(chord.getNotes().size()-1) == null) {
+                System.out.println(chord);
+            }
+            chords.add(chord);
+        }
+//        System.out.println(chords);
     }
 
     /**
@@ -103,21 +135,29 @@ public class Tab implements Comparable<Tab>{
      */
     public int calculateFitness(){
         fitness = 0;
-        Chord lastChord = chords.get(0);
-        GuitarNote lastNote = lastChord.getNotes().get(lastChord.getNotes().size()-1);
+        GuitarNote lastNote;
+        double avgFret;
+        double lastAvgFret = 0;
         for (Chord chord : chords){
-            for (GuitarNote note : chord.getNotes()){
-                fitness += 24-note.getFretNumber();
-                fitness += Math.sqrt(Math.pow(note.getFretNumber() - lastNote.getFretNumber(), 2));
+//            System.out.println(chord);
+            avgFret = 0.0;
+            ArrayList<GuitarNote> notes = chord.getNotes();
+            lastNote = notes.get(0);
+            for (GuitarNote note : notes){
+                fitness += (Math.sqrt(Math.pow(note.getFretNumber() - lastNote.getFretNumber(), 2)));
                 lastNote = note;
+                avgFret += note.getFretNumber();
             }
+            avgFret = avgFret/ notes.size();
+            fitness += (Math.sqrt(Math.pow(avgFret - lastAvgFret, 2)));
+            fitness += avgFret;
+            lastAvgFret = avgFret;
         }
         return fitness;
     }
 
     @Override
     public int compareTo(Tab t) {
-        // Allows Tabs to be sorted in descending order of fitness
-        return Integer.compare(t.fitness, this.fitness);
+        return Integer.compare(this.fitness, t.fitness);
     }
 }
