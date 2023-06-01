@@ -58,6 +58,7 @@ public class Chord{
             string = possibleStrings.get(random);
 //            System.out.println(string);
             possibleStrings.remove(Integer.valueOf(string));
+            unoccupiedStrings.remove(Integer.valueOf(string));
             if(note.randomPositionOnString(string)){
                 if(index == notes.size()-1){
 //                    System.out.println("Chord finished");
@@ -69,6 +70,7 @@ public class Chord{
                     return true;
                 }
             }
+            unoccupiedStrings.add(string);
         }
         if(index == 0){
             throw new Exception("Error, Notes:" + notes);
